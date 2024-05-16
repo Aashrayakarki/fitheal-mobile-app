@@ -1,6 +1,8 @@
 import 'package:final_assignment/common_widget/my_button.dart';
 import 'package:final_assignment/common_widget/my_text_form_field.dart';
+import 'package:final_assignment/screens/dashboard_screen.dart';
 import 'package:final_assignment/screens/register_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 40),
             const Text(
               "Email address:",
               style: TextStyle(
@@ -69,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               text: "Enter your password",
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
@@ -85,25 +87,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             MyButton(
               text: "Login",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardScreen()),
+                );
+              },
               color: Colors.orange,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             const Align(
               alignment: Alignment.center,
               child: Text("Or Login with"),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             MyButton(
                 text: "Connect with Google",
                 textColor: Colors.black,
                 color: Colors.white,
                 onPressed: () {},
                 iconAsset: 'assets/icons/google.ico'),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             MyButton(
               text: "Connect with Facebook",
               textColor: Colors.white,
@@ -112,22 +120,33 @@ class _LoginScreenState extends State<LoginScreen> {
               iconAsset: 'assets/icons/facebook.ico',
               iconSize: 32,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Align(
               alignment: Alignment.center,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterScreen()),
-                  );
-                },
-                child: const Text(
-                  "Don't have an account? Register!",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
+              child: RichText(
+                text: TextSpan(
+                  text: "Don't have an account? ",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
                   ),
+                  children: [
+                    TextSpan(
+                      text: 'Register',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterScreen()),
+                          );
+                        },
+                    ),
+                  ],
                 ),
               ),
             ),

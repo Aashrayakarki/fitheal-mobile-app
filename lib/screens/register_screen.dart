@@ -1,4 +1,7 @@
+import 'package:final_assignment/common_widget/my_button.dart';
 import 'package:final_assignment/common_widget/my_text_form_field.dart';
+import 'package:final_assignment/screens/login_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,7 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               text: "Enter your full name",
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             const Text(
               "Phone no:",
               style: TextStyle(
@@ -69,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               text: "Enter your phone number",
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             const Text(
               "Email:",
               style: TextStyle(
@@ -81,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   email = value;
                 },
                 text: "Enter your email"),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             const Text(
               "Password:",
               style: TextStyle(
@@ -93,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   password = value;
                 },
                 text: "Enter your password"),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             const Text(
               "Confirm password:",
               style: TextStyle(
@@ -106,6 +109,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 text: "Enter your password again"),
             const SizedBox(height: 16),
+            MyButton(
+                text: "Create Account", color: Colors.orange, onPressed: () {}),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(
+                  text: "Already have an account? ",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Login',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
+                        },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
