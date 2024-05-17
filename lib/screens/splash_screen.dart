@@ -1,4 +1,4 @@
-import 'package:final_assignment/screens/login_screen.dart';
+import 'package:final_assignment/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,20 +10,24 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
       );
     });
 
     return const Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
               image: AssetImage(
-                  'assets/images/Fitheal.png'), // Replace with your image path
+                  'assets/images/fitheal_dark.png'), // Replace with your image path
             ),
-            Text("Welcome!!!"),
+            Text(
+              "Version 1.0.0",
+              style: TextStyle(color: Colors.white),
+            ),
           ],
         ),
       ),
