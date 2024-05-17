@@ -18,27 +18,115 @@ class WelcomeScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 80),
-              Align(
-                alignment: Alignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 80),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Welcome to',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Align(
+              alignment: Alignment.center,
+              child: Image(
+                image: AssetImage("assets/images/fitheal.png"),
+              ),
+            ),
+            const SizedBox(height: 40),
+            Container(
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: const Center(
                 child: Text(
-                  'Welcome to',
+                  'Start Your Journey Towards \n A More Active Lifestyle',
                   style: TextStyle(
-                    fontSize: 24,
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            Container(
+              color: Colors.transparent,
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('|', style: TextStyle(fontSize: 20)),
+                      SizedBox(width: 27),
+                      Icon(Icons.sports_gymnastics_rounded, size: 40),
+                      SizedBox(width: 27),
+                      Text('|', style: TextStyle(fontSize: 20)),
+                      SizedBox(width: 27),
+                      Icon(Icons.book, size: 40),
+                      SizedBox(width: 27),
+                      Text('|', style: TextStyle(fontSize: 20)),
+                      SizedBox(width: 27),
+                      Icon(Icons.apple, size: 40),
+                      SizedBox(width: 27),
+                      Text('|', style: TextStyle(fontSize: 20)),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Workout'),
+                      SizedBox(width: 30),
+                      Text('Progress\n Tracking'),
+                      SizedBox(width: 30),
+                      Text('Nutrition'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(color: Colors.black, width: 1),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(235, 249, 178, 134),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    "Get Started",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Align(
-                  alignment: Alignment.center,
-                  child: Image(image: AssetImage("assets/images/fitheal.png")))
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
