@@ -1,3 +1,4 @@
+import 'package:final_assignment/register_step_screens/step_five.dart';
 import 'package:flutter/material.dart';
 
 class StepFour extends StatefulWidget {
@@ -8,9 +9,8 @@ class StepFour extends StatefulWidget {
 }
 
 class _StepFourState extends State<StepFour> {
-  bool isKg = true; // Default is kg
-  int selectedWeight = 50; // Default selected weight
-
+  bool isKg = true;
+  int selectedWeight = 50;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +95,7 @@ class _StepFourState extends State<StepFour> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: selectedWeight == weight
-                                  ? Colors.blue
+                                  ? Colors.black
                                   : Colors.grey[300],
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -120,14 +120,14 @@ class _StepFourState extends State<StepFour> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             Center(
               child: Text(
                 'Selected Weight: $selectedWeight ${isKg ? 'kg' : 'lbs'}',
                 style: const TextStyle(fontSize: 20),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 100),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -135,7 +135,7 @@ class _StepFourState extends State<StepFour> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const StepFour(),
+                      builder: (context) => const StepFive(),
                     ),
                   );
                 },
@@ -148,7 +148,7 @@ class _StepFourState extends State<StepFour> {
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                 ),
                 child: const Text(
-                  'Next',
+                  'NEXT',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
