@@ -126,7 +126,7 @@ class WelcomeScreen extends StatelessWidget {
                             builder: (context) => const LoginScreen()));
                   },
                   child: const Text(
-                    "Get Started",
+                    "PROCEED",
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
                 ),
