@@ -1,3 +1,4 @@
+import 'package:final_assignment/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -71,19 +72,19 @@ class WelcomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('|', style: TextStyle(fontSize: 20)),
+                      Text('|', style: TextStyle(fontSize: 30)),
                       SizedBox(width: 27),
                       Icon(Icons.sports_gymnastics_rounded, size: 40),
                       SizedBox(width: 27),
-                      Text('|', style: TextStyle(fontSize: 20)),
+                      Text('|', style: TextStyle(fontSize: 30)),
                       SizedBox(width: 27),
                       Icon(Icons.book, size: 40),
                       SizedBox(width: 27),
-                      Text('|', style: TextStyle(fontSize: 20)),
+                      Text('|', style: TextStyle(fontSize: 30)),
                       SizedBox(width: 27),
                       Icon(Icons.apple, size: 40),
                       SizedBox(width: 27),
-                      Text('|', style: TextStyle(fontSize: 20)),
+                      Text('|', style: TextStyle(fontSize: 30)),
                     ],
                   ),
                   SizedBox(height: 4),
@@ -91,9 +92,9 @@ class WelcomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Workout'),
-                      SizedBox(width: 30),
+                      SizedBox(width: 40),
                       Text('Progress\n Tracking'),
-                      SizedBox(width: 30),
+                      SizedBox(width: 40),
                       Text('Nutrition'),
                     ],
                   ),
@@ -118,7 +119,12 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()));
+                  },
                   child: const Text(
                     "Get Started",
                     style: TextStyle(color: Colors.black, fontSize: 20),
