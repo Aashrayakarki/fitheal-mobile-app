@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 24),
                 const Text(
-                  "Full name:",
+                  "User name:",
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -119,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   validator: _nameValidator,
                   decoration: InputDecoration(
-                    hintText: 'Enter your email',
+                    hintText: 'Enter your user name',
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 12.0, horizontal: 16.0),
                     border: OutlineInputBorder(
@@ -138,9 +138,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(color: Colors.red),
                     ),
+                    suffixIcon: const Icon(Icons.person),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 const Text(
                   "Phone no:",
                   style: TextStyle(
@@ -172,9 +173,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(color: Colors.red),
                     ),
+                    suffixIcon: const Icon(Icons.phone),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 const Text(
                   "Email:",
                   style: TextStyle(
@@ -206,9 +208,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(color: Colors.red),
                     ),
+                    suffixIcon: const Icon(Icons.email),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 const Text(
                   "Password:",
                   style: TextStyle(
@@ -254,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 const Text(
                   "Confirm password:",
                   style: TextStyle(
@@ -300,7 +303,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
                 MyButton(
                   text: "Create Account",
                   color: Colors.orange,

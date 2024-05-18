@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Welcome to Fitheal!!!',
+                    'Welcome to Fitheal',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -115,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(color: Colors.red),
                     ),
+                    suffixIcon: const Icon(Icons.email),
                   ),
                 ),
                 const SizedBox(height: 16),

@@ -14,10 +14,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard Screen'),
+        automaticallyImplyLeading: false,
+        toolbarHeight: 100,
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.orange,
+      ),
+      body: const Center(
+        child: Text("THIS IS THE DASHBOARD SCREEN",
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
