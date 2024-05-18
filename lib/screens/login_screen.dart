@@ -19,8 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() {
     if (_formKey.currentState?.validate() ?? false) {
-      // If the form is valid, proceed with the login
-      // Perform login logic here
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('User logged in successfully!'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.green, // Set the background color to green
+        ),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const DashboardScreen()),

@@ -1,4 +1,4 @@
-import 'package:final_assignment/screens/splash_screen.dart';
+import 'package:final_assignment/register_step_screens/step_one.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       // themes
-      home: SplashScreen(),
+      home: StepOne(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:final_assignment/common_widget/my_button.dart';
+import 'package:final_assignment/register_step_screens/step_one.dart';
 import 'package:final_assignment/screens/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscureText = true;
 
   void _register() {
-    if (_formKey.currentState?.validate() ?? false) {}
+    if (_formKey.currentState?.validate() ?? false) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('User registered successfully!'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.green, // Set the background color to green
+        ),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const StepOne()),
+      );
+    }
   }
 
   String? _nameValidator(String? value) {
