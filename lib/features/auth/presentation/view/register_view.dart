@@ -1,36 +1,57 @@
 import 'package:final_assignment/common_widget/my_button.dart';
-import 'package:final_assignment/screens/dashboard_screen.dart';
-import 'package:final_assignment/screens/register_screen.dart';
+import 'package:final_assignment/features/auth/presentation/view/login_view.dart';
+import 'package:final_assignment/register_step_screens/step_one.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
+  String? confirmPassword;
+  String? name;
+  String? phone;
   bool _obscureText = true;
 
-  void _login() {
+  void _register() {
     if (_formKey.currentState?.validate() ?? false) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User logged in successfully!'),
+          content: Text('User registered successfully!'),
           duration: Duration(seconds: 2),
           backgroundColor: Colors.green, // Set the background color to green
         ),
       );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        MaterialPageRoute(builder: (context) => const StepOne()),
       );
     }
+  }
+
+  String? _nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your full name';
+    }
+    return null;
+  }
+
+  String? _phoneValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    final phoneRegex = RegExp(r'^\d{10}$');
+    if (!phoneRegex.hasMatch(value)) {
+      return 'Please enter a valid 10-digit phone number';
+    }
+    return null;
   }
 
   String? _emailValidator(String? value) {
@@ -54,6 +75,16 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
+  String? _confirmPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please confirm your password';
+    }
+    if (value != password) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Welcome to Fitheal',
+                    'Create an account',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -82,15 +113,85 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Hello there, sign in to continue!',
+                    'Please enter your credentials to continue',
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 24),
                 const Text(
-                  "Email address:",
+                  "User name:",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                TextFormField(
+                  onChanged: (value) {
+                    name = value;
+                  },
+                  validator: _nameValidator,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your user name',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.blue),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    suffixIcon: const Icon(Icons.person),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  "Phone no:",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                TextFormField(
+                  onChanged: (value) {
+                    phone = value;
+                  },
+                  validator: _phoneValidator,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your phone number',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.blue),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    suffixIcon: const Icon(Icons.phone),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  "Email:",
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -123,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     suffixIcon: const Icon(Icons.email),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 const Text(
                   "Password:",
                   style: TextStyle(
@@ -169,62 +270,71 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: const Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                const SizedBox(height: 12),
+                const Text(
+                  "Confirm password:",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                TextFormField(
+                  onChanged: (value) {
+                    confirmPassword = value;
+                  },
+                  validator: _confirmPasswordValidator,
+                  obscureText: _obscureText,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your password again',
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.blue),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(color: Colors.red),
+                    ),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                      child: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
                 MyButton(
-                  text: "Login",
-                  onPressed: _login,
+                  text: "Create Account",
                   color: Colors.orange,
+                  onPressed: _register,
                 ),
-                const SizedBox(height: 24),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text("Or Login with"),
-                ),
-                const SizedBox(height: 24),
-                MyButton(
-                  text: "Connect with Google",
-                  textColor: Colors.black,
-                  color: Colors.white,
-                  onPressed: () {},
-                  iconAsset: 'assets/icons/google.ico',
-                ),
-                const SizedBox(height: 24),
-                MyButton(
-                  text: "Connect with Facebook",
-                  textColor: Colors.white,
-                  color: const Color.fromARGB(243, 0, 70, 221),
-                  onPressed: () {},
-                  iconAsset: 'assets/icons/facebook.ico',
-                  iconSize: 32,
-                ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 Align(
                   alignment: Alignment.center,
                   child: RichText(
                     text: TextSpan(
-                      text: "Don't have an account? ",
+                      text: "Already have an account? ",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                       ),
                       children: [
                         TextSpan(
-                          text: 'Register',
+                          text: 'Login',
                           style: const TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
@@ -234,8 +344,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const RegisterScreen(),
-                                ),
+                                    builder: (context) => const LoginView()),
                               );
                             },
                         ),

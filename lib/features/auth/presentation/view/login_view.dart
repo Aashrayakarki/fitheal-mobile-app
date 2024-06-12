@@ -1,57 +1,36 @@
 import 'package:final_assignment/common_widget/my_button.dart';
-import 'package:final_assignment/register_step_screens/step_one.dart';
-import 'package:final_assignment/screens/login_screen.dart';
+import 'package:final_assignment/features/auth/presentation/view/register_view.dart';
+import 'package:final_assignment/screens/dashboard_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  String? confirmPassword;
-  String? name;
-  String? phone;
   bool _obscureText = true;
 
-  void _register() {
+  void _login() {
     if (_formKey.currentState?.validate() ?? false) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User registered successfully!'),
+          content: Text('User logged in successfully!'),
           duration: Duration(seconds: 2),
           backgroundColor: Colors.green, // Set the background color to green
         ),
       );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const StepOne()),
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
       );
     }
-  }
-
-  String? _nameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your full name';
-    }
-    return null;
-  }
-
-  String? _phoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your phone number';
-    }
-    final phoneRegex = RegExp(r'^\d{10}$');
-    if (!phoneRegex.hasMatch(value)) {
-      return 'Please enter a valid 10-digit phone number';
-    }
-    return null;
   }
 
   String? _emailValidator(String? value) {
@@ -75,16 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
-  String? _confirmPasswordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
-    }
-    if (value != password) {
-      return 'Passwords do not match';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Create an account',
+                    'Welcome to Fitheal',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -113,85 +82,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Please enter your credentials to continue',
+                    'Hello there, sign in to continue!',
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 40),
                 const Text(
-                  "User name:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    name = value;
-                  },
-                  validator: _nameValidator,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your user name',
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    suffixIcon: const Icon(Icons.person),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Phone no:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    phone = value;
-                  },
-                  validator: _phoneValidator,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your phone number',
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    suffixIcon: const Icon(Icons.phone),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Email:",
+                  "Email address:",
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -224,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     suffixIcon: const Icon(Icons.email),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 const Text(
                   "Password:",
                   style: TextStyle(
@@ -270,71 +169,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Confirm password:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    confirmPassword = value;
-                  },
-                  validator: _confirmPasswordValidator,
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your password again',
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                      child: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey,
+                const SizedBox(height: 24),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      "Forgot password?",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
                 MyButton(
-                  text: "Create Account",
+                  text: "Login",
+                  onPressed: _login,
                   color: Colors.orange,
-                  onPressed: _register,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text("Or Login with"),
+                ),
+                const SizedBox(height: 24),
+                MyButton(
+                  text: "Connect with Google",
+                  textColor: Colors.black,
+                  color: Colors.white,
+                  onPressed: () {},
+                  iconAsset: 'assets/icons/google.ico',
+                ),
+                const SizedBox(height: 24),
+                MyButton(
+                  text: "Connect with Facebook",
+                  textColor: Colors.white,
+                  color: const Color.fromARGB(243, 0, 70, 221),
+                  onPressed: () {},
+                  iconAsset: 'assets/icons/facebook.ico',
+                  iconSize: 32,
+                ),
+                const SizedBox(height: 24),
                 Align(
                   alignment: Alignment.center,
                   child: RichText(
                     text: TextSpan(
-                      text: "Already have an account? ",
+                      text: "Don't have an account? ",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                       ),
                       children: [
                         TextSpan(
-                          text: 'Login',
+                          text: 'Register',
                           style: const TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
@@ -344,7 +234,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()),
+                                  builder: (context) => const RegisterView(),
+                                ),
                               );
                             },
                         ),

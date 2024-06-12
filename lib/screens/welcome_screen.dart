@@ -1,4 +1,4 @@
-import 'package:final_assignment/screens/login_screen.dart';
+import 'package:final_assignment/features/auth/presentation/view/login_view.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -128,7 +128,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginScreen()));
+                            builder: (context) => const LoginView()));
                   },
                   child: const Text(
                     "PROCEED",
