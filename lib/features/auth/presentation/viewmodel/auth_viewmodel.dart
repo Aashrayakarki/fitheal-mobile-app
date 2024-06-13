@@ -1,5 +1,6 @@
 import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
+import 'package:final_assignment/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:final_assignment/features/auth/presentation/navigator/login_navigator.dart';
 import 'package:final_assignment/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
     }, (r) {
       state = state.copyWith(isLoading: false, error: null);
       showMySnackBar(message: 'Login Successful');
-      navigator.openHomeView();
+      // navigator.openHomeView();
     });
   }
 
