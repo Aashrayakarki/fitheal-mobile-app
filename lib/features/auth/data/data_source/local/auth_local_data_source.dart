@@ -47,10 +47,6 @@ class AuthLocalDataSource {
     try {
       final student = await hiveService.login(username, password);
 
-      if (student == null) {
-        return const Right(false);
-      }
-
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));

@@ -1,4 +1,3 @@
-import 'package:final_assignment/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class GetStarted extends StatelessWidget {
@@ -38,11 +37,7 @@ class GetStarted extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Handle button press here
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DashboardScreen()),
-                  );
+                  
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
