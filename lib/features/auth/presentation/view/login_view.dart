@@ -12,8 +12,8 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController(text: 'karkeez');
-  final _passwordController = TextEditingController(text: 'Arsenal');
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _gap = const SizedBox(height: 8);
   bool isObscure = true;
 
@@ -56,6 +56,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Username',
+                        suffixIcon: Icon(Icons.person)
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {

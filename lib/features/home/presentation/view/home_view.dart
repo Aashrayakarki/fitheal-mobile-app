@@ -28,11 +28,11 @@ class _HomeViewState extends ConsumerState<HomeView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'Course',
+            label: 'Exercises',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.batch_prediction),
-            label: 'Batch',
+            label: 'Meal Plans',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -139,7 +139,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter first name';
+                        return 'Please enter your first name';
                       }
                       return null;
                     }),
@@ -152,7 +152,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter last name';
+                        return 'Please enter your last name';
                       }
                       return null;
                     }),
@@ -162,10 +162,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     controller: _phoneController,
                     decoration: const InputDecoration(
                       labelText: 'Phone No',
+                      suffixIcon: Icon(Icons.phone),
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter phoneNo';
+                        return 'Please enter your phone number';
                       }
                       return null;
                     }),
@@ -176,10 +177,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     controller: _usernameController,
                     decoration: const InputDecoration(
                       labelText: 'Username',
+                      suffixIcon: Icon(Icons.person),
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter username';
+                        return 'Please enter your username';
                       }
                       return null;
                     }),
@@ -205,7 +207,33 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter password';
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    }),
+                  ),
+                  _gap,
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: authState.obscurePassword,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          authState.obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .obsurePassword();
+                        },
+                      ),
+                    ),
+                    validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password again';
                       }
                       return null;
                     }),
