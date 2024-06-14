@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:final_assignment/features/auth/presentation/viewmodel/auth_viewmodel.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -66,6 +67,20 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               key: _key,
               child: Column(
                 children: [
+                  const Text(
+                    'Create an account',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    'Please enter your credentials to continue',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  _gap, _gap, //gap
                   InkWell(
                     onTap: () {
                       showModalBottomSheet(
@@ -106,8 +121,8 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       );
                     },
                     child: SizedBox(
-                      height: 200,
-                      width: 200,
+                      height: 180,
+                      width: 180,
                       child: CircleAvatar(
                         radius: 50,
                         backgroundImage: _img != null
@@ -196,7 +211,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       return null;
                     }),
                   ),
-                  _gap,
+                  _gap, _gap, //gap
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -216,6 +231,27 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         }
                       },
                       child: const Text('Register'),
+                    ),
+                  ),
+                  _gap, _gap, //gap
+                  RichText(
+                    text: TextSpan(
+                      text: "Already have an account? ",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Login',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
+                        ),
+                      ],
                     ),
                   ),
                 ],

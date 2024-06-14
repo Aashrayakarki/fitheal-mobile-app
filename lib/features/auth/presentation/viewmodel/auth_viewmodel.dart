@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final authViewModelProvider =
     StateNotifierProvider<AuthViewModel, AuthState>((ref) {
   final navigator = ref.read(loginViewNavigatorProvider);
+
   return AuthViewModel(ref.read(authUseCaseProvider), navigator);
 });
 
@@ -50,4 +51,5 @@ class AuthViewModel extends StateNotifier<AuthState> {
   void openRegisterView() {
     navigator.openRegisterView();
   }
+  
 }

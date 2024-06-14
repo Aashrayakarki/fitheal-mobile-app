@@ -1,4 +1,3 @@
-import 'package:final_assignment/features/auth/presentation/view/register_view.dart';
 import 'package:final_assignment/features/auth/presentation/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         fontSize: 16,
                       ),
                     ),
-                    _gap,
+                    _gap, _gap, _gap, _gap, _gap, _gap, //gap
                     TextFormField(
                       key: const ValueKey('username'),
                       controller: _usernameController,
@@ -59,7 +58,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         return null;
                       },
                     ),
-                    _gap,
+                    _gap, _gap, _gap, _gap, //gap
                     TextFormField(
                       key: const ValueKey('password'),
                       controller: _passwordController,
@@ -127,7 +126,17 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                    _gap,
+                    _gap, _gap, //gap
+
+                    const Text(
+                      'Or Login with',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+
+                    _gap, _gap, //gap
+
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -173,13 +182,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           child: Row(
                             children: [
                               Image.asset(
-                                'assets/icons/facebook.ico', // Path to your custom image
-                                height: 35.0, // Adjust the image height
-                                width: 30.0, // Adjust the image width
+                                'assets/icons/facebook.ico',
+                                height: 35.0,
+                                width: 30.0,
                               ),
                               const SizedBox(
-                                width:
-                                    60.0, // Space between the image and the text
+                                width: 60.0,
                               ),
                               const Text(
                                 'Connect with Facebook',
@@ -194,36 +202,30 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                    _gap,
-                    Align(
-                      alignment: Alignment.center,
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Don't have an account? ",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                          children: [
-                            TextSpan(
-                              text: 'Register',
-                              style: const TextStyle(
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const RegisterView(),
-                                    ),
-                                  );
-                                },
-                            ),
-                          ],
+                    _gap, _gap, _gap, _gap, //gap
+                    RichText(
+                      text: TextSpan(
+                        text: "Don't have an account? ",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
                         ),
+                        children: [
+                          TextSpan(
+                            text: 'Register',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                ref
+                                    .read(authViewModelProvider.notifier)
+                                    .openRegisterView();
+                              },
+                          ),
+                        ],
                       ),
                     ),
                   ],
