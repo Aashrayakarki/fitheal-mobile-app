@@ -56,8 +56,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
-        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

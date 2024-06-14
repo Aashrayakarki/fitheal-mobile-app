@@ -1,17 +1,19 @@
-import 'package:final_assignment/screens/welcome_screen.dart';
+import 'package:final_assignment/features/welcome/presentation/viewmodel/welcome_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashView extends ConsumerStatefulWidget {
+  const SplashView({super.key});
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends ConsumerState<SplashView> {
+  @override
   Widget build(BuildContext context) {
-    // Delay navigation to GridViewScreen by 2 seconds
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-      );
+      ref.read(welcomeViewModelProvider.notifier).openWelcomeView();
     });
 
     return const Scaffold(

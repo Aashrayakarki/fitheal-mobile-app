@@ -1,9 +1,15 @@
-import 'package:final_assignment/features/auth/presentation/view/login_view.dart';
+import 'package:final_assignment/features/auth/presentation/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class WelcomeView extends ConsumerStatefulWidget {
+  const WelcomeView({super.key});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _WelcomeViewState();
+}
+
+class _WelcomeViewState extends ConsumerState<WelcomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,10 +131,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginView()));
+                    ref.read(authViewModelProvider.notifier).openLoginView();
                   },
                   child: const Text(
                     "PROCEED",
