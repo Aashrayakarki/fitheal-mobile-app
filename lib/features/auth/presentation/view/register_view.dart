@@ -186,6 +186,19 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       return null;
                     }),
                   ),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address',
+                      suffixIcon: Icon(Icons.mail),
+                    ),
+                    validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email address';
+                      }
+                      return null;
+                    }),
+                  ),
                   _gap,
                   TextFormField(
                     controller: _passwordController,
