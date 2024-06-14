@@ -1,251 +1,185 @@
 import 'package:final_assignment/common_widget/my_button.dart';
 import 'package:final_assignment/features/auth/presentation/view/register_view.dart';
-import 'package:final_assignment/screens/dashboard_screen.dart';
+import 'package:final_assignment/features/auth/presentation/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
-  bool _obscureText = true;
-
-  void _login() {
-    if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('User logged in successfully!'),
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.green, // Set the background color to green
-        ),
-      );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
-      );
-    }
-  }
-
-  String? _emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your email';
-    }
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    if (!emailRegex.hasMatch(value)) {
-      return 'Please enter a valid email';
-    }
-    return null;
-  }
-
-  String? _passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    }
-    if (value.length < 8) {
-      return 'Password must be at least 8 characters long';
-    }
-    return null;
-  }
+  final _usernameController = TextEditingController(text: 'karkeez');
+  final _passwordController = TextEditingController(text: 'Arsenal');
+  final _gap = const SizedBox(height: 8);
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authViewModelProvider);
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Welcome to Fitheal',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Hello there, sign in to continue!',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
-                const Text(
-                  "Email address:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  validator: _emailValidator,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    suffixIcon: const Icon(Icons.email),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  "Password:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  validator: _passwordValidator,
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your password',
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Colors.red),
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                      child: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: const Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                MyButton(
-                  text: "Login",
-                  onPressed: _login,
-                  color: Colors.orange,
-                ),
-                const SizedBox(height: 24),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text("Or Login with"),
-                ),
-                const SizedBox(height: 24),
-                MyButton(
-                  text: "Connect with Google",
-                  textColor: Colors.black,
-                  color: Colors.white,
-                  onPressed: () {},
-                  iconAsset: 'assets/icons/google.ico',
-                ),
-                const SizedBox(height: 24),
-                MyButton(
-                  text: "Connect with Facebook",
-                  textColor: Colors.white,
-                  color: const Color.fromARGB(243, 0, 70, 221),
-                  onPressed: () {},
-                  iconAsset: 'assets/icons/facebook.ico',
-                  iconSize: 32,
-                ),
-                const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.center,
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Don't have an account? ",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: 'Register',
-                          style: const TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                          'Welcome to Fitheal',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const RegisterView(),
-                                ),
-                              );
-                            },
                         ),
-                      ],
+                        _gap,
+                      const Text(
+                          'Hello there, sign in to continue!',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        _gap,
+                     TextFormField(
+                      key: const ValueKey('username'),
+                      controller: _usernameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Username',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter username';
+                        }
+                        return null;
+                      },
                     ),
+                    _gap,
+                    TextFormField(
+                      key: const ValueKey('password'),
+                      controller: _passwordController,
+                      obscureText: authState.obscurePassword,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            authState.obscurePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .obsurePassword();
+                          },
+                        ),
+                      ),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      }),
+                    ),
+                    _gap,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: const Text(
+                            "Forgot password?",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                      onPressed: () {
+                        {
+                          if (_formKey.currentState!.validate()) {
+                            ref.read(authViewModelProvider.notifier).login(
+                                  username: _usernameController.text,
+                                  password: _passwordController.text,
+                                );
+                          }
+                        }
+                      },
+                      child: const SizedBox(
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Brand Bold',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                      MyButton(
+                        text: "Connect with Google",
+                        textColor: Colors.black,
+                        color: Colors.white,
+                        onPressed: () {},
+                        iconAsset: 'assets/icons/google.ico',
+                      ),
+                      const SizedBox(height: 24),
+                      MyButton(
+                        text: "Connect with Facebook",
+                        textColor: Colors.white,
+                        color: const Color.fromARGB(243, 0, 70, 221),
+                        onPressed: () {},
+                        iconAsset: 'assets/icons/facebook.ico',
+                        iconSize: 32,
+                      ),
+                      const SizedBox(height: 24),
+                      Align(
+                        alignment: Alignment.center,
+                        child: RichText(
+                          text: TextSpan(
+                            text: "Don't have an account? ",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Register',
+                                style: const TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const RegisterView(),
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
         ),
       ),
     );
