@@ -38,7 +38,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    _gap,
                     const Text(
                       'Hello there, sign in to continue!',
                       style: TextStyle(
@@ -122,6 +121,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             style: TextStyle(
                               fontSize: 18,
                               fontFamily: 'Brand Bold',
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -131,27 +131,60 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.white, // Set the button color to white
+                        backgroundColor: Colors.white,
+                        side: const BorderSide(
+                          color: Color.fromARGB(255, 206, 201, 201),
+                          width: 1.0,
+                        ),
                       ),
-                      child: const SizedBox(
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/icons/google.ico',
+                              height: 20.0,
+                              width: 35.0,
+                            ),
+                            const SizedBox(
+                              width: 60.0,
+                            ),
+                            const Text(
+                              'Connect with Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: 'Brand Bold',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    _gap,
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(243, 0, 70, 221),
+                      ),
+                      child: SizedBox(
                         height: 50,
                         child: Center(
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
-                                Icons.g_mobiledata_sharp,
-                                color: Colors.black,
-                                size: 32,
+                              Image.asset(
+                                'assets/icons/facebook.ico', // Path to your custom image
+                                height: 35.0, // Adjust the image height
+                                width: 30.0, // Adjust the image width
                               ),
-                              SizedBox(
-                                  width:
-                                      8.0), // Space between the image and the text
-                              Text(
-                                'Connect with Google',
+                              const SizedBox(
+                                width:
+                                    60.0, // Space between the image and the text
+                              ),
+                              const Text(
+                                'Connect with Facebook',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 18,
                                   fontFamily: 'Brand Bold',
                                 ),
@@ -161,23 +194,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-
-                    // MyButton(
-                    //   text: "Connect with Google",
-                    //   textColor: Colors.black,
-                    //   color: Colors.white,
-                    //   onPressed: () {},
-                    //   iconAsset: 'assets/icons/google.ico',
-                    // ),
-
-                    // MyButton(
-                    //   text: "Connect with Facebook",
-                    //   textColor: Colors.white,
-                    //   color: const Color.fromARGB(243, 0, 70, 221),
-                    //   onPressed: () {},
-                    //   iconAsset: 'assets/icons/facebook.ico',
-                    //   iconSize: 32,
-                    // ),
                     _gap,
                     Align(
                       alignment: Alignment.center,
@@ -185,9 +201,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         text: TextSpan(
                           text: "Don't have an account? ",
                           style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                          ),
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                           children: [
                             TextSpan(
                               text: 'Register',
