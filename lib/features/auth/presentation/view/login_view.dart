@@ -1,4 +1,3 @@
-import 'package:final_assignment/common_widget/my_button.dart';
 import 'package:final_assignment/features/auth/presentation/view/register_view.dart';
 import 'package:final_assignment/features/auth/presentation/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/gestures.dart';
@@ -30,24 +29,24 @@ class _LoginViewState extends ConsumerState<LoginView> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                          'Welcome to Fitheal',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        _gap,
-                      const Text(
-                          'Hello there, sign in to continue!',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        _gap,
-                     TextFormField(
+                child: Column(
+                  children: [
+                    const Text(
+                      'Welcome to Fitheal',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    _gap,
+                    const Text(
+                      'Hello there, sign in to continue!',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    _gap,
+                    TextFormField(
                       key: const ValueKey('username'),
                       controller: _usernameController,
                       decoration: const InputDecoration(
@@ -89,22 +88,22 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       }),
                     ),
                     _gap,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: const Text(
+                          "Forgot password?",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
                       onPressed: () {
                         {
                           if (_formKey.currentState!.validate()) {
@@ -128,58 +127,94 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                      MyButton(
-                        text: "Connect with Google",
-                        textColor: Colors.black,
-                        color: Colors.white,
-                        onPressed: () {},
-                        iconAsset: 'assets/icons/google.ico',
+                    _gap,
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.white, // Set the button color to white
                       ),
-                      const SizedBox(height: 24),
-                      MyButton(
-                        text: "Connect with Facebook",
-                        textColor: Colors.white,
-                        color: const Color.fromARGB(243, 0, 70, 221),
-                        onPressed: () {},
-                        iconAsset: 'assets/icons/facebook.ico',
-                        iconSize: 32,
-                      ),
-                      const SizedBox(height: 24),
-                      Align(
-                        alignment: Alignment.center,
-                        child: RichText(
-                          text: TextSpan(
-                            text: "Don't have an account? ",
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
+                      child: const SizedBox(
+                        height: 50,
+                        child: Center(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              TextSpan(
-                                text: 'Register',
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline,
+                              Icon(
+                                Icons.g_mobiledata_sharp,
+                                color: Colors.black,
+                                size: 32,
+                              ),
+                              SizedBox(
+                                  width:
+                                      8.0), // Space between the image and the text
+                              Text(
+                                'Connect with Google',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontFamily: 'Brand Bold',
                                 ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const RegisterView(),
-                                      ),
-                                    );
-                                  },
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+
+                    // MyButton(
+                    //   text: "Connect with Google",
+                    //   textColor: Colors.black,
+                    //   color: Colors.white,
+                    //   onPressed: () {},
+                    //   iconAsset: 'assets/icons/google.ico',
+                    // ),
+
+                    // MyButton(
+                    //   text: "Connect with Facebook",
+                    //   textColor: Colors.white,
+                    //   color: const Color.fromARGB(243, 0, 70, 221),
+                    //   onPressed: () {},
+                    //   iconAsset: 'assets/icons/facebook.ico',
+                    //   iconSize: 32,
+                    // ),
+                    _gap,
+                    Align(
+                      alignment: Alignment.center,
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'Register',
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterView(),
+                                    ),
+                                  );
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+          ),
         ),
       ),
     );
