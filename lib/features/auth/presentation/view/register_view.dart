@@ -127,7 +127,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         radius: 50,
                         backgroundImage: _img != null
                             ? FileImage(_img!)
-                            : const AssetImage('assets/images/profile.png')
+                            : const AssetImage('assets/images/user.png')
                                 as ImageProvider,
                       ),
                     ),
@@ -249,7 +249,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              ref
+                                  .read(authViewModelProvider.notifier)
+                                  .openLoginView();
+                            },
                         ),
                       ],
                     ),

@@ -30,6 +30,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
+                    const Image(
+                      image: AssetImage('assets/images/fitheal.png'),
+                      height: 140,
+                      width: 200,
+                    ),
+                    _gap, _gap, //gap
                     const Text(
                       'Welcome to Fitheal',
                       style: TextStyle(
