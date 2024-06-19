@@ -7,6 +7,7 @@ import 'package:final_assignment/features/auth/presentation/state/auth_state.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//authViewModel
 final authViewModelProvider =
     StateNotifierProvider<AuthViewModel, AuthState>((ref) {
   final loginNavigator = ref.read(loginViewNavigatorProvider);
