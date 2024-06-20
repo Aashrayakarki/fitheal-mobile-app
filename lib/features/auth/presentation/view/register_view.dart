@@ -31,6 +31,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       if (image != null) {
         setState(() {
           _img = File(image.path);
+          ref.read(authViewModelProvider.notifier).uploadImage(_img!);
         });
       } else {
         return;
@@ -50,10 +51,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  bool isObscure = true;
+
   @override
   Widget build(BuildContext context) {
-    var authState = ref.watch(authViewModelProvider);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -189,19 +190,18 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: authState.obscurePassword,
+                    obscureText: isObscure,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          authState.obscurePassword
+                        icon: Icon( isObscure
                               ? Icons.visibility
                               : Icons.visibility_off,
                         ),
                         onPressed: () {
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .obsurePassword();
+                          setState(() {
+                            isObscure = !isObscure;
+                          });
                         },
                       ),
                     ),
@@ -215,19 +215,19 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: authState.obscurePassword,
+                    obscureText: isObscure,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       suffixIcon: IconButton(
                         icon: Icon(
-                          authState.obscurePassword
+                          isObscure
                               ? Icons.visibility
                               : Icons.visibility_off,
                         ),
                         onPressed: () {
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .obsurePassword();
+                          setState(() {
+                            isObscure = !isObscure;
+                          });
                         },
                       ),
                     ),
@@ -245,16 +245,18 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       onPressed: () {
                         if (_key.currentState!.validate()) {
                           // Register
-                          AuthEntity auth = AuthEntity(
+                          var student = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
+                            image:
+                                ref.read(authViewModelProvider).imageName ?? '',
                             phone: _phoneController.text,
                             username: _usernameController.text,
                             password: _passwordController.text,
                           );
                           ref
                               .read(authViewModelProvider.notifier)
-                              .addStudent(auth: auth);
+                              .registerStudent(student);
                         }
                       },
                       child: const Text('Register'),

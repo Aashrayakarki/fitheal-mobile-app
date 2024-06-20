@@ -54,10 +54,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       key: const ValueKey('username'),
                       controller: _usernameController,
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Username',
-                        suffixIcon: Icon(Icons.person)
-                      ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Username',
+                          suffixIcon: Icon(Icons.person)),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter username';
@@ -69,19 +68,17 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     TextFormField(
                       key: const ValueKey('password'),
                       controller: _passwordController,
-                      obscureText: authState.obscurePassword,
+                      obscureText: isObscure,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         suffixIcon: IconButton(
                           icon: Icon(
-                            authState.obscurePassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            isObscure ? Icons.visibility : Icons.visibility_off,
                           ),
                           onPressed: () {
-                            ref
-                                .read(authViewModelProvider.notifier)
-                                .obsurePassword();
+                           setState(() {
+                            isObscure = !isObscure;
+                           });
                           },
                         ),
                       ),
@@ -109,12 +106,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ),
                     const SizedBox(height: 24),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         {
                           if (_formKey.currentState!.validate()) {
-                            ref.read(authViewModelProvider.notifier).login(
-                                  username: _usernameController.text,
-                                  password: _passwordController.text,
+                            await ref.read(authViewModelProvider.notifier).loginStudent(
+                                  _usernameController.text,
+                                  _passwordController.text,
                                 );
                           }
                         }

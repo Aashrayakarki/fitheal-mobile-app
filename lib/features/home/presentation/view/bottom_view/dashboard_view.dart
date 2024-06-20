@@ -29,7 +29,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             onPressed: () {
               // ref.read(batchViewModelProvider.notifier).getBatches();
               // ref.read(courseViewModelProvider.notifier).getCourses();
-              showMySnackBar(message: 'Refressing...');
+              showMySnackBar(message: 'Refreshing...');
             },
             icon: const Icon(
               Icons.refresh,

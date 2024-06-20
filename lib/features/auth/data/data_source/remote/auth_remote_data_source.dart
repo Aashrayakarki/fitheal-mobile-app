@@ -6,6 +6,7 @@ import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/failure/failure.dart';
 import 'package:final_assignment/core/networking/remote/http_service.dart';
 import 'package:final_assignment/core/shared_prefs/user_shared_prefs.dart';
+import 'package:final_assignment/features/auth/data/dto/get_current_user_dto.dart';
 import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
