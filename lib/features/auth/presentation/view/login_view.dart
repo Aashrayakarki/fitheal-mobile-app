@@ -12,7 +12,7 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _gap = const SizedBox(height: 8);
   bool isObscure = true;
@@ -52,14 +52,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     _gap, _gap, _gap, _gap, _gap, _gap, //gap
                     TextFormField(
                       key: const ValueKey('username'),
-                      controller: _usernameController,
+                      controller: _emailController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Username',
+                          labelText: 'Email address',
                           suffixIcon: Icon(Icons.person)),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter username';
+                          return 'Please enter your address';
                         }
                         return null;
                       },
@@ -110,7 +110,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         {
                           if (_formKey.currentState!.validate()) {
                             await ref.read(authViewModelProvider.notifier).loginStudent(
-                                  _usernameController.text,
+                                  _emailController.text,
                                   _passwordController.text,
                                 );
                           }

@@ -7,7 +7,6 @@ import 'package:final_assignment/features/auth/presentation/navigator/login_navi
 import 'package:final_assignment/features/auth/presentation/navigator/register_navigator.dart';
 import 'package:final_assignment/features/auth/presentation/state/auth_state.dart';
 import 'package:final_assignment/features/home/presentation/navigator/home_navigator.dart';
-import 'package:final_assignment/features/home/presentation/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

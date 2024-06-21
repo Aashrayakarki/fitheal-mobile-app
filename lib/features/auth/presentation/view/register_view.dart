@@ -48,7 +48,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _fnameController = TextEditingController();
   final _lnameController = TextEditingController();
   final _phoneController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool isObscure = true;
@@ -175,14 +175,14 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   _gap,
                   _gap,
                   TextFormField(
-                    controller: _usernameController,
+                    controller: _emailController,
                     decoration: const InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'Email address',
                       suffixIcon: Icon(Icons.person),
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your username';
+                        return 'Please enter your email address';
                       }
                       return null;
                     }),
@@ -251,7 +251,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             image:
                                 ref.read(authViewModelProvider).imageName ?? '',
                             phone: _phoneController.text,
-                            username: _usernameController.text,
+                            username: _emailController.text,
                             password: _passwordController.text,
                           );
                           ref

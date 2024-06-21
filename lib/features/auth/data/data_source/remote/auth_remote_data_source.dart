@@ -32,7 +32,7 @@ class AuthRemoteDataSource {
           "lname": student.lname,
           "phone": student.phone,
           "image": student.image,
-          "username": student.username,
+          "username": student.email,
           "password": student.password,
         },
       );
@@ -88,14 +88,14 @@ class AuthRemoteDataSource {
   }
 
   Future<Either<Failure, bool>> loginStudent(
-    String username,
+    String email,
     String password,
   ) async {
     try {
       Response response = await dio.post(
         ApiEndpoints.login,
         data: {
-          "username": username,
+          "email": email,
           "password": password,
         },
       );

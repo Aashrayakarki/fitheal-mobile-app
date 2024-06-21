@@ -11,7 +11,7 @@ class AuthApiModel {
   final String lname;
   final String? image;
   final String phone;
-  final String username;
+  final String email;
   final String? password;
 
   AuthApiModel({
@@ -20,7 +20,7 @@ class AuthApiModel {
     required this.lname,
     required this.image,
     required this.phone,
-    required this.username,
+    required this.email,
     required this.password,
   });
 
@@ -37,7 +37,7 @@ class AuthApiModel {
       lname: lname,
       image: image,
       phone: phone,
-      username: username,
+      email: email,
       password: password ?? '',
     );
   }
