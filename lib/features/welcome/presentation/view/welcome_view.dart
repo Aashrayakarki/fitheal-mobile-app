@@ -29,7 +29,7 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 60),
               const Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -70,7 +70,7 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               Container(
                 color: Colors.transparent,
                 child: const Column(
@@ -113,7 +113,7 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
                   ],
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               Align(
                 alignment: Alignment.center,
                 child: Container(
@@ -141,6 +141,7 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
                   ),
                 ),
               ),
+              const SizedBox(height: 150),
             ],
           ),
         ),

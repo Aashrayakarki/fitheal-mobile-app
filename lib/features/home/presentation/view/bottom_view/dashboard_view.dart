@@ -55,10 +55,14 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               }),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(),
-      ),
+      body: const Center(
+          child: Text(
+        'WELCOME TO DASHBOARD SCREEN',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      )),
     );
   }
 }

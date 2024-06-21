@@ -37,15 +37,17 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     return InputDecoration(
       hintText: hintText,
       hintStyle: const TextStyle(color: Colors.grey),
+      filled: true,
+      fillColor: Colors.orange.withOpacity(0.1),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: Colors.blue, width: 2),
+        borderSide: const BorderSide(color: Colors.orange, width: 2),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: Colors.grey, width: 1),
+        borderSide: const BorderSide(color: Colors.orangeAccent, width: 1),
       ),
-      suffixIcon: icon != null ? Icon(icon, color: Colors.grey) : null,
+      suffixIcon: icon != null ? Icon(icon, color: Colors.orangeAccent) : null,
       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
     );
   }
@@ -63,7 +65,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       children: [
         Text(
           labelText,
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         _gap,
         TextFormField(
@@ -80,11 +82,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -94,6 +91,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _gap, _gap, _gap, _gap, _gap, _gap, //gap
                   const Text(
                     'Create an account',
                     style: TextStyle(
@@ -108,7 +106,8 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  _gap,
+                  _gap,
                   _buildTextFormField(
                     labelText: 'First Name:',
                     hintText: 'Enter your first name',
