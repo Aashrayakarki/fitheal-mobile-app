@@ -50,6 +50,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   bool isObscure = true;
 
@@ -184,6 +185,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email address';
                       }
+                      // Regex pattern for email validation
+                      final RegExp emailRegex = RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                      );
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      }
                       return null;
                     }),
                   ),
@@ -194,9 +202,8 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     decoration: InputDecoration(
                       labelText: 'Password',
                       suffixIcon: IconButton(
-                        icon: Icon( isObscure
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                        icon: Icon(
+                          isObscure ? Icons.visibility : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -214,15 +221,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   ),
                   _gap,
                   TextFormField(
-                    controller: _passwordController,
+                    controller: _confirmPasswordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       suffixIcon: IconButton(
                         icon: Icon(
-                          isObscure
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          isObscure ? Icons.visibility : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -251,7 +256,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             image:
                                 ref.read(authViewModelProvider).imageName ?? '',
                             phone: _phoneController.text,
-                            username: _emailController.text,
+                            email: _emailController.text,
                             password: _passwordController.text,
                           );
                           ref
