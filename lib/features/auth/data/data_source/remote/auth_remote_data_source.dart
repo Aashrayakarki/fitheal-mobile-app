@@ -57,35 +57,35 @@ class AuthRemoteDataSource {
   }
 
   // Upload image using multipart
-  Future<Either<Failure, String>> uploadProfilePicture(
-    File image,
-  ) async {
-    try {
-      String fileName = image.path.split('/').last;
-      FormData formData = FormData.fromMap(
-        {
-          'profilePicture': await MultipartFile.fromFile(
-            image.path,
-            filename: fileName,
-          ),
-        },
-      );
+  // Future<Either<Failure, String>> uploadProfilePicture(
+  //   File image,
+  // ) async {
+  //   try {
+  //     String fileName = image.path.split('/').last;
+  //     FormData formData = FormData.fromMap(
+  //       {
+  //         'profilePicture': await MultipartFile.fromFile(
+  //           image.path,
+  //           filename: fileName,
+  //         ),
+  //       },
+  //     );
 
-      Response response = await dio.post(
-        ApiEndpoints.uploadImage,
-        data: formData,
-      );
+  //     Response response = await dio.post(
+  //       ApiEndpoints.uploadImage,
+  //       data: formData,
+  //     );
 
-      return Right(response.data["data"]);
-    } on DioException catch (e) {
-      return Left(
-        Failure(
-          error: e.error.toString(),
-          statusCode: e.response?.statusCode.toString() ?? '0',
-        ),
-      );
-    }
-  }
+  //     return Right(response.data["data"]);
+  //   } on DioException catch (e) {
+  //     return Left(
+  //       Failure(
+  //         error: e.error.toString(),
+  //         statusCode: e.response?.statusCode.toString() ?? '0',
+  //       ),
+  //     );
+  //   }
+  // }
 
   Future<Either<Failure, bool>> loginStudent(
     String email,

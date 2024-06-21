@@ -29,12 +29,12 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 300,
-              width: 300,
-              child: Image.network(
-                  '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
-            ),
+            // SizedBox(
+            //   height: 300,
+            //   width: 300,
+            //   child: Image.network(
+            //       '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
+            // ),
             const SizedBox(height: 10),
             Text(
               "First Name : ${currentUser.authEntity?.fname ?? ""}",

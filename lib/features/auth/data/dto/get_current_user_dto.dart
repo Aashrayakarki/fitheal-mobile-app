@@ -10,7 +10,6 @@ class GetCurrentUserDto {
   final String fname;
   final String lname;
   final String phone;
-  final String image;
   final String email;
 
   GetCurrentUserDto({
@@ -18,7 +17,6 @@ class GetCurrentUserDto {
     required this.fname,
     required this.lname,
     required this.phone,
-    required this.image,
     required this.email,
   });
 
@@ -27,7 +25,6 @@ class GetCurrentUserDto {
         id: id,
         fname: fname,
         lname: lname,
-        image: image,
         phone: phone,
         email: email,
         password: '');

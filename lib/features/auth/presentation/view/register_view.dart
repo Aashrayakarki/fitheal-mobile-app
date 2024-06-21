@@ -24,23 +24,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     }
   }
 
-  File? _img;
-  Future _browseImage(WidgetRef ref, ImageSource imageSource) async {
-    try {
-      final image = await ImagePicker().pickImage(source: imageSource);
-      if (image != null) {
-        setState(() {
-          _img = File(image.path);
-          ref.read(authViewModelProvider.notifier).uploadImage(_img!);
-        });
-      } else {
-        return;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
   final _gap = const SizedBox(height: 8);
 
   final _key = GlobalKey<FormState>();
@@ -82,57 +65,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                   ),
                   _gap, _gap, //gap
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.grey[300],
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        builder: (context) => Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  checkCameraPermission();
-                                  _browseImage(ref, ImageSource.camera);
-                                  Navigator.pop(context);
-                                  // Upload image it is not null
-                                },
-                                icon: const Icon(Icons.camera),
-                                label: const Text('Camera'),
-                              ),
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  _browseImage(ref, ImageSource.gallery);
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.image),
-                                label: const Text('Gallery'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    child: SizedBox(
-                      height: 180,
-                      width: 180,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _img != null
-                            ? FileImage(_img!)
-                            : const AssetImage('assets/images/user.png')
-                                as ImageProvider,
-                      ),
-                    ),
-                  ),
+                  
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _fnameController,
@@ -219,30 +152,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       return null;
                     }),
                   ),
-                  _gap,
-                  TextFormField(
-                    controller: _confirmPasswordController,
-                    obscureText: isObscure,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isObscure = !isObscure;
-                          });
-                        },
-                      ),
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password again';
-                      }
-                      return null;
-                    }),
-                  ),
                   _gap, _gap, //gap
                   SizedBox(
                     width: double.infinity,
@@ -253,8 +162,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           var student = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
-                            image:
-                                ref.read(authViewModelProvider).imageName ?? '',
                             phone: _phoneController.text,
                             email: _emailController.text,
                             password: _passwordController.text,
