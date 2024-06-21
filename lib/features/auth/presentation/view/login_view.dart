@@ -51,25 +51,25 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ),
                     _gap, _gap, _gap, _gap, _gap, _gap, //gap
                     TextFormField(
-                      key: const ValueKey('username'),
+                      key: const ValueKey('email'),
                       controller: _emailController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Email address',
                           suffixIcon: Icon(Icons.person)),
                       validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email address';
-                      }
-                      // Regex pattern for email validation
-                      final RegExp emailRegex = RegExp(
-                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                      );
-                      if (!emailRegex.hasMatch(value)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    }),
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email address';
+                        }
+                        // Regex pattern for email validation
+                        final RegExp emailRegex = RegExp(
+                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                        );
+                        if (!emailRegex.hasMatch(value)) {
+                          return 'Please enter a valid email address';
+                        }
+                        return null;
+                      }),
                     ),
                     _gap, _gap, _gap, _gap, //gap
                     TextFormField(
@@ -83,9 +83,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             isObscure ? Icons.visibility : Icons.visibility_off,
                           ),
                           onPressed: () {
-                           setState(() {
-                            isObscure = !isObscure;
-                           });
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
                           },
                         ),
                       ),
@@ -116,7 +116,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       onPressed: () async {
                         {
                           if (_formKey.currentState!.validate()) {
-                            await ref.read(authViewModelProvider.notifier).loginStudent(
+                            await ref
+                                .read(authViewModelProvider.notifier)
+                                .loginStudent(
                                   _emailController.text,
                                   _passwordController.text,
                                 );

@@ -31,8 +31,7 @@ class AuthRemoteDataSource {
           "fname": student.fname,
           "lname": student.lname,
           "phone": student.phone,
-          "image": student.image,
-          "username": student.email,
+          "email": student.email,
           "password": student.password,
         },
       );
