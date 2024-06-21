@@ -57,12 +57,19 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           border: OutlineInputBorder(),
                           labelText: 'Email address',
                           suffixIcon: Icon(Icons.person)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your address';
-                        }
-                        return null;
-                      },
+                      validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email address';
+                      }
+                      // Regex pattern for email validation
+                      final RegExp emailRegex = RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                      );
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    }),
                     ),
                     _gap, _gap, _gap, _gap, //gap
                     TextFormField(
