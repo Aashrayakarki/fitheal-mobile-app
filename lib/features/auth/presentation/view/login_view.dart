@@ -227,7 +227,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           TextSpan(
                             text: 'Register',
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: Colors.orange,
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             ),
