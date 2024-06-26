@@ -1,47 +1,47 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_hive_model.dart';
+part of 'exercise_hive_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AuthHiveModelAdapter extends TypeAdapter<AuthHiveModel> {
+class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  AuthHiveModel read(BinaryReader reader) {
+  ExerciseHiveModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return AuthHiveModel(
-      userId: fields[0] as String?,
-      fname: fields[1] as String,
-      lname: fields[2] as String,
-      phone: fields[3] as String,
-      email: fields[4] as String,
-      password: fields[5] as String,
+    return ExerciseHiveModel(
+      exerciseId: fields[0] as String?,
+      exerciseName: fields[1] as String,
+      exerciseTime: fields[2] as num,
+      exerciseCalories: fields[3] as num,
+      exerciseLevel: fields[4] as String,
+      exerciseVideo: fields[5] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, AuthHiveModel obj) {
+  void write(BinaryWriter writer, ExerciseHiveModel obj) {
     writer
       ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.userId)
+      ..write(obj.exerciseId)
       ..writeByte(1)
-      ..write(obj.fname)
+      ..write(obj.exerciseName)
       ..writeByte(2)
-      ..write(obj.lname)
+      ..write(obj.exerciseTime)
       ..writeByte(3)
-      ..write(obj.phone)
+      ..write(obj.exerciseCalories)
       ..writeByte(4)
-      ..write(obj.email)
+      ..write(obj.exerciseLevel)
       ..writeByte(5)
-      ..write(obj.password);
+      ..write(obj.exerciseVideo);
   }
 
   @override
@@ -50,7 +50,7 @@ class AuthHiveModelAdapter extends TypeAdapter<AuthHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AuthHiveModelAdapter &&
+      other is ExerciseHiveModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

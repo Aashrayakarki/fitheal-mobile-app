@@ -11,4 +11,9 @@ class ApiEndpoints {
   static const String login = "user/login";
   static const String register = "user/register";
   static const String currentUser = "user/getMe";
+
+  // ====================== Exercise Routes ======================
+  static const String createExercise = "exercise/createExercise";
+  static const String getAllExercises = "exercise/getAllExercises";
+  static const String deleteExercise = "exercise/";
 }
