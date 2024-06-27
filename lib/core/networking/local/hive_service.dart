@@ -14,6 +14,7 @@ class HiveService {
 
     // Register Adapters
     Hive.registerAdapter(AuthHiveModelAdapter());
+    Hive.registerAdapter(ExerciseHiveModelAdapter());
   }
 
   // ============= User Queries
@@ -36,9 +37,8 @@ class HiveService {
     box.close();
     return user;
   }
-}
 
-// ======================== Exercise Queries ========================
+  // ======================== Exercise Queries ========================
   Future<void> addExercise(ExerciseHiveModel exercise) async {
     var box = await Hive.openBox<ExerciseHiveModel>(HiveTableConstant.exerciseBox);
     await box.put(exercise.exerciseId, exercise);
@@ -50,3 +50,6 @@ class HiveService {
     box.close();
     return exercises;
   }
+
+}
+

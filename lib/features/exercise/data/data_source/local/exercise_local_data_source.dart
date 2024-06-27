@@ -5,7 +5,7 @@ import 'package:final_assignment/features/exercise/data/model/exercise_hive_mode
 import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final ExerciseLocalDataSourceProvider = Provider<ExerciseLocalDataSource>(
+final exerciseLocalDataSourceProvider = Provider<ExerciseLocalDataSource>(
   (ref) => ExerciseLocalDataSource(
     hiveService: ref.read(hiveServiceProvider),
     exerciseHiveModel: ref.read(exerciseHiveModelProvider),
@@ -20,7 +20,7 @@ class ExerciseLocalDataSource {
     required this.hiveService,
     required this.exerciseHiveModel,
   });
-  // Add Course
+  // Add Exercise
   Future<Either<Failure, bool>> addExercise(ExerciseEntity exercise) async {
     try {
       // Convert Entity to Hive Object
@@ -33,7 +33,7 @@ class ExerciseLocalDataSource {
     }
   }
 
-  // Get All Courses
+  // Get All Exercises
   Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() async {
     try {
       // Get from Hive
