@@ -4,7 +4,7 @@ import 'package:final_assignment/features/exercise/domain/entity/exercise_entity
 import 'package:final_assignment/features/exercise/domain/repository/exercise_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final courseUseCaseProvider = Provider<ExerciseUseCase>(
+final exerciseUseCaseProvider = Provider<ExerciseUseCase>(
   (ref) => ExerciseUseCase(
     exerciseRepository: ref.read(exerciseRepositoryProvider),
   ),
