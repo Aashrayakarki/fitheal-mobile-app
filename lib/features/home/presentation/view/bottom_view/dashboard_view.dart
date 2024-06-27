@@ -1,5 +1,7 @@
 import 'package:final_assignment/core/common/my_snackbar.dart';
+import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/home_viewmodel.dart';
+import 'package:final_assignment/features/home/presentation/widget/exercise_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,6 +23,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
+    var exerciseState = ref.watch(exerciseViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard View'),
@@ -55,14 +58,26 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               }),
         ],
       ),
-      body: const Center(
-          child: Text(
-        'WELCOME TO DASHBOARD SCREEN',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Exercises',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Flexible(
+              child: ExerciseWidget(exerciseList: exerciseState.lstExercises),
+            ),
+          ],
         ),
-      )),
+      ),
     );
   }
 }

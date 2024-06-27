@@ -19,8 +19,8 @@ class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
     return ExerciseHiveModel(
       exerciseId: fields[0] as String?,
       exerciseName: fields[1] as String,
-      exerciseTime: fields[2] as num,
-      exerciseCalories: fields[3] as num,
+      exerciseTime: fields[2] as String,
+      exerciseCalories: fields[3] as String,
       exerciseLevel: fields[4] as String,
       exerciseVideo: fields[5] as String,
     );

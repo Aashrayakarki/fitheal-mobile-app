@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class ExerciseEntity extends Equatable {
-  final String exerciseId;
+  final String? exerciseId;
   final String exerciseName;
-  final num exerciseTime;
-  final num exerciseCalories;
+  final String exerciseTime;
+  final String exerciseCalories;
   final String exerciseLevel;
   final String exerciseVideo;
 
   const ExerciseEntity({
-    required this.exerciseId,
+    this.exerciseId,
     required this.exerciseName,
     required this.exerciseTime,
     required this.exerciseCalories,

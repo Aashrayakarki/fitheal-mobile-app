@@ -22,10 +22,10 @@ class ExerciseHiveModel {
   final String exerciseName;
 
   @HiveField(2)
-  final num exerciseTime;
+  final String exerciseTime;
 
   @HiveField(3)
-  final num exerciseCalories;
+  final String exerciseCalories;
 
   @HiveField(4)
   final String exerciseLevel;
@@ -34,7 +34,7 @@ class ExerciseHiveModel {
   final String exerciseVideo;
 
   // empty constructor
-  ExerciseHiveModel.empty() : this(exerciseId: '', exerciseName: '', exerciseTime: 0, exerciseCalories: 0, exerciseLevel: '', exerciseVideo: '');
+  ExerciseHiveModel.empty() : this(exerciseId: '', exerciseName: '', exerciseTime: '', exerciseCalories: '', exerciseLevel: '', exerciseVideo: '');
 
   ExerciseHiveModel({
     String? exerciseId,

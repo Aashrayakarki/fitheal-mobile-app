@@ -9,15 +9,15 @@ final exerciseApiModelProvider = Provider<ExerciseApiModel>((ref) {
 @JsonSerializable()
 class ExerciseApiModel {
   @JsonKey(name: '_id')
-  final String exerciseId;
+  final String? exerciseId;
   final String exerciseName;
-  final num exerciseTime;
-  final num exerciseCalories;
+  final String exerciseTime;
+  final String exerciseCalories;
   final String exerciseLevel;
   final String exerciseVideo;
 
   ExerciseApiModel({
-    required this.exerciseId,
+    this.exerciseId,
     required this.exerciseName,
     required this.exerciseTime,
     required this.exerciseCalories,
@@ -29,8 +29,8 @@ class ExerciseApiModel {
   ExerciseApiModel.empty()
       : exerciseId = '',
       exerciseName = '',
-        exerciseTime = 0,
-        exerciseCalories = 0,
+        exerciseTime = '',
+        exerciseCalories = '',
         exerciseLevel = '',
         exerciseVideo = '';
 
