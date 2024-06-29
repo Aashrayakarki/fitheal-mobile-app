@@ -17,7 +17,7 @@ class ExerciseApiModel {
   final String exerciseVideo;
 
   ExerciseApiModel({
-    this.exerciseId,
+    required this.exerciseId,
     required this.exerciseName,
     required this.exerciseTime,
     required this.exerciseCalories,
@@ -28,7 +28,7 @@ class ExerciseApiModel {
   // Empty constructor
   ExerciseApiModel.empty()
       : exerciseId = '',
-      exerciseName = '',
+        exerciseName = '',
         exerciseTime = '',
         exerciseCalories = '',
         exerciseLevel = '',
@@ -67,7 +67,7 @@ class ExerciseApiModel {
 
   // Convert Entity to API Object
   ExerciseApiModel fromEntity(ExerciseEntity entity) => ExerciseApiModel(
-        exerciseId: entity.exerciseId,
+        exerciseId: entity.exerciseId ?? '',
         exerciseName: entity.exerciseName,
         exerciseTime: entity.exerciseTime,
         exerciseCalories: entity.exerciseCalories,

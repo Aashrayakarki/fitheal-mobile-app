@@ -31,7 +31,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           IconButton(
             onPressed: () {
               // ref.read(batchViewModelProvider.notifier).getBatches();
-              // ref.read(courseViewModelProvider.notifier).getCourses();
+              ref.read(exerciseViewModelProvider.notifier).getAllExercises();
               showMySnackBar(message: 'Refreshing...');
             },
             icon: const Icon(

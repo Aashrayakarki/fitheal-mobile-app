@@ -1,4 +1,3 @@
-
 import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 
 class ExerciseState {

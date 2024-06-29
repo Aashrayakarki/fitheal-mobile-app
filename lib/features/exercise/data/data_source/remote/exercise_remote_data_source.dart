@@ -9,7 +9,8 @@ import 'package:final_assignment/features/exercise/data/model/exercise_api_model
 import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final exerciseRemoteDataSourceProvider = Provider<ExerciseRemoteDataSource>((ref) {
+final exerciseRemoteDataSourceProvider =
+    Provider<ExerciseRemoteDataSource>((ref) {
   final dio = ref.read(httpServiceProvider);
   final exerciseApiModel = ref.read(exerciseApiModelProvider);
   final userSharedPrefs = ref.read(userSharedPrefsProvider);
@@ -34,7 +35,7 @@ class ExerciseRemoteDataSource {
 
   Future<Either<Failure, bool>> addExercise(ExerciseEntity exercise) async {
     try {
-      final response = await dio.post(
+      var response = await dio.post(
         ApiEndpoints.createExercise,
         data: exerciseApiModel.fromEntity(exercise).toJson(),
       );
@@ -50,10 +51,11 @@ class ExerciseRemoteDataSource {
 
   Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() async {
     try {
-      final response = await dio.get(ApiEndpoints.getAllExercises);
+      var response = await dio.get(ApiEndpoints.getAllExercises);
       if (response.statusCode == 200) {
         final getAllExerciseDto = GetAllExerciseDto.fromJson(response.data);
-        final exercises = getAllExerciseDto.data.map((e) => e.toEntity()).toList();
+        final exercises =
+            getAllExerciseDto.data.map((e) => e.toEntity()).toList();
         return Right(exercises);
       } else {
         return Left(Failure(error: 'Failed to get all exercises'));
@@ -72,7 +74,7 @@ class ExerciseRemoteDataSource {
         (l) => token = null,
         (r) => token = r!,
       );
-      //localhost:3000/api/v1/course/666fa63c025b203550d06179
+
       Response response = await dio.delete(
         ApiEndpoints.deleteExercise + exerciseId,
         options: Options(

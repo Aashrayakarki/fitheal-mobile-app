@@ -20,7 +20,7 @@ class ExerciseViewModel extends StateNotifier<ExerciseState> {
   }
 
   deleteExercise(ExerciseEntity exercise) async {
-    state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true);
     var data = await exerciseUseCase.deleteExercise(exercise.exerciseId!);
 
     data.fold(
@@ -41,7 +41,7 @@ class ExerciseViewModel extends StateNotifier<ExerciseState> {
   }
 
   addExercise(ExerciseEntity exercise) async {
-    state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true);
     var data = await exerciseUseCase.addExercise(exercise);
 
     data.fold(
@@ -62,9 +62,11 @@ class ExerciseViewModel extends StateNotifier<ExerciseState> {
     state = state.copyWith(isLoading: true);
     var data = await exerciseUseCase.getAllExercises();
 
-    data.fold(
-      (l) => state = state.copyWith(isLoading: false, error: l.error),
-      (r) => state = state.copyWith(isLoading: false, exercises: r),
-    );
+    data.fold((l) {
+      state = state.copyWith(isLoading: false, error: l.error);
+      showMySnackBar(message: l.error, color: Colors.red);
+    }, (r) {
+      state = state.copyWith(isLoading: false, exercises: r);
+    });
   }
 }

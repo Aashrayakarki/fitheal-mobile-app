@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:final_assignment/app/constants/hive_table_constant.dart';
 import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +12,6 @@ final exerciseHiveModelProvider = Provider(
 
 @HiveType(typeId: HiveTableConstant.exerciseTableId)
 class ExerciseHiveModel {
-
   @HiveField(0)
   final String exerciseId;
 
@@ -34,7 +31,14 @@ class ExerciseHiveModel {
   final String exerciseVideo;
 
   // empty constructor
-  ExerciseHiveModel.empty() : this(exerciseId: '', exerciseName: '', exerciseTime: '', exerciseCalories: '', exerciseLevel: '', exerciseVideo: '');
+  ExerciseHiveModel.empty()
+      : this(
+            exerciseId: '',
+            exerciseName: '',
+            exerciseTime: '',
+            exerciseCalories: '',
+            exerciseLevel: '',
+            exerciseVideo: '');
 
   ExerciseHiveModel({
     String? exerciseId,
@@ -43,9 +47,7 @@ class ExerciseHiveModel {
     required this.exerciseCalories,
     required this.exerciseLevel,
     required this.exerciseVideo,
-
-  }) 
-  : exerciseId = exerciseId ?? const Uuid().v4();
+  }) : exerciseId = exerciseId ?? const Uuid().v4();
 
   ExerciseEntity toEntity() {
     return ExerciseEntity(
@@ -65,7 +67,8 @@ class ExerciseHiveModel {
       exerciseTime: entity.exerciseTime,
       exerciseCalories: entity.exerciseCalories,
       exerciseLevel: entity.exerciseLevel,
-      exerciseVideo: entity.exerciseVideo,);
+      exerciseVideo: entity.exerciseVideo,
+    );
   }
 
   List<ExerciseEntity> toEntityList(List<ExerciseHiveModel> hiveModels) {
