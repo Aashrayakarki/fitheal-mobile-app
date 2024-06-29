@@ -8,13 +8,13 @@ class ExerciseView extends ConsumerStatefulWidget {
   const ExerciseView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddExerciseViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddExerciseViewState();
 }
 
 class _AddExerciseViewState extends ConsumerState<ExerciseView> {
   final exerciseNameController = TextEditingController();
   final exerciseTimeController = TextEditingController();
-  final exerciseIdController = TextEditingController();
   final exerciseCaloriesController = TextEditingController();
   final exerciseLevelController = TextEditingController();
   final exerciseVideoController = TextEditingController();
@@ -118,8 +118,12 @@ class _AddExerciseViewState extends ConsumerState<ExerciseView> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    ExerciseEntity exercise =
-                        ExerciseEntity(exerciseName: exerciseNameController.text, exerciseTime: exerciseTimeController.text, exerciseCalories: exerciseCaloriesController.text, exerciseLevel: exerciseLevelController.text, exerciseVideo: exerciseVideoController.text);
+                    ExerciseEntity exercise = ExerciseEntity(
+                        exerciseName: exerciseNameController.text,
+                        exerciseTime: exerciseTimeController.text,
+                        exerciseCalories: exerciseCaloriesController.text,
+                        exerciseLevel: exerciseLevelController.text,
+                        exerciseVideo: exerciseVideoController.text);
                     ref
                         .read(exerciseViewModelProvider.notifier)
                         .addExercise(exercise);
