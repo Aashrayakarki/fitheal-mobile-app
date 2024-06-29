@@ -12,15 +12,15 @@ class ExerciseWidget extends StatelessWidget {
       itemCount: exerciseList.length,
       // physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1.5,
+        crossAxisCount: 1,
+        childAspectRatio: 1.2,
       ),
       itemBuilder: (context, index) {
         return Card(
           color: Colors.yellow[100],
           child: Center(
             child: Text(
-              exerciseList[index].exerciseName,
+              '${exerciseList[index].exerciseName}, ${exerciseList[index].exerciseTime}, ${exerciseList[index].exerciseCalories}, ${exerciseList[index].exerciseLevel}, ${exerciseList[index].exerciseVideo}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

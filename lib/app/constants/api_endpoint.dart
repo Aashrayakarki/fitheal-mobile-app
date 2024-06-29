@@ -17,6 +17,7 @@ class ApiEndpoints {
 
   // ====================== Exercise Routes ======================
   static const String createExercise = "exercise/create";
-  static const String getAllExercises = "exercise/get_all_exercises";
+  static const String getAllExercises = "exercise/pagination";
   static const String deleteExercise = "exercise/";
+  // static const String paginationExercise = "exercise/pagination";
 }
