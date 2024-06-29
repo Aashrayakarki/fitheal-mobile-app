@@ -19,8 +19,8 @@ class ExerciseUseCase {
     return exerciseRepository.addExercise(exercise);
   }
 
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() {
-    return exerciseRepository.getAllExercises();
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(int page) {
+    return exerciseRepository.getAllExercises(page);
   }
 
   Future<Either<Failure, bool>> deleteExercise(String id) async {

@@ -19,5 +19,7 @@ class ApiEndpoints {
   static const String createExercise = "exercise/create";
   static const String getAllExercises = "exercise/pagination";
   static const String deleteExercise = "exercise/";
+  static const String imageUrl = "http://10.0.2.2:3000/products/";
+
   // static const String paginationExercise = "exercise/pagination";
 }

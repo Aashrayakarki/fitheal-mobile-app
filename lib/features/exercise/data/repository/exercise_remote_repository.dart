@@ -27,7 +27,7 @@ class ExerciseRemoteRepository implements IExerciseRepository {
   }
 
   @override
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() {
-    return exerciseRemoteDataSource.getAllExercises();
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page) {
+    return exerciseRemoteDataSource.getAllExercises(page);
   }
 }

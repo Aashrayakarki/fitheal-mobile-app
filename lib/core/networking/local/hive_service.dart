@@ -44,7 +44,7 @@ class HiveService {
     await box.put(exercise.exerciseId, exercise);
   }
 
-  Future<List<ExerciseHiveModel>> getAllExercises() async {
+  Future<List<ExerciseHiveModel>> getAllExercises(int page) async {
     var box = await Hive.openBox<ExerciseHiveModel>(HiveTableConstant.exerciseBox);
     var exercises = box.values.toList();
     box.close();

@@ -22,8 +22,8 @@ class ExerciseLocalRepositoryImpl implements IExerciseRepository {
   }
 
   @override
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() {
-    return exerciseLocalDataSource.getAllExercises();
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page) {
+    return exerciseLocalDataSource.getAllExercises(page);
   }
 
   @override

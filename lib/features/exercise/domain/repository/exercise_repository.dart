@@ -10,7 +10,7 @@ final exerciseRepositoryProvider = Provider<IExerciseRepository>(
 
 abstract class IExerciseRepository {
   Future<Either<Failure, bool>> addExercise(ExerciseEntity exercise);
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises();
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page);
   Future<Either<Failure, bool>> deleteExercise(String id);
 }
 

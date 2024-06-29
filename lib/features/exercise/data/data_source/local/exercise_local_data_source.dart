@@ -34,10 +34,10 @@ class ExerciseLocalDataSource {
   }
 
   // Get All Exercises
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() async {
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(int page) async {
     try {
       // Get from Hive
-      final hiveExercises = await hiveService.getAllExercises();
+      final hiveExercises = await hiveService.getAllExercises(page);
       // Convert Hive Object to Entity
       final exercises = exerciseHiveModel.toEntityList(hiveExercises);
       return Right(exercises);

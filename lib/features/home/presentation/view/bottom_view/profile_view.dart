@@ -32,7 +32,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             //   height: 300,
             //   width: 300,
             //   child: Image.network(
-            //       '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
+                  // '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
             // ),
             const SizedBox(height: 10),
             Text(

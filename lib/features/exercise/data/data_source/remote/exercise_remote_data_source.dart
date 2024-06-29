@@ -49,7 +49,7 @@ class ExerciseRemoteDataSource {
     }
   }
 
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises() async {
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(int page) async {
     try {
       var response = await dio.get(ApiEndpoints.getAllExercises);
       if (response.statusCode == 200) {
