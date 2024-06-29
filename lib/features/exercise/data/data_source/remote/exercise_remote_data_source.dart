@@ -49,19 +49,21 @@ class ExerciseRemoteDataSource {
     }
   }
 
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(int page) async {
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page) async {
+    // send the page number too
     try {
-      var response = await dio.get(ApiEndpoints.getAllExercises);
-      if (response.statusCode == 200) {
-        final getAllExerciseDto = GetAllExerciseDto.fromJson(response.data);
-        final exercises =
-            getAllExerciseDto.data.map((e) => e.toEntity()).toList();
-        return Right(exercises);
-      } else {
-        return Left(Failure(error: 'Failed to get all exercises'));
-      }
-    } catch (e) {
-      return Left(Failure(error: e.toString()));
+      final response = await dio.get(
+        ApiEndpoints.getAllExercises,
+        queryParameters: {
+          'page': page,
+        },
+      );
+
+      final getAllExerciseDto = GetAllExerciseDto.fromJson(response.data);
+
+      return Right(getAllExerciseDto.data.map((e) => e.toEntity()).toList());
+    } catch (error) {
+      return Left(Failure(error: error.toString()));
     }
   }
 

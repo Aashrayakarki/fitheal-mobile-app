@@ -38,4 +38,8 @@ class ExerciseState {
       lstExercises: exercises ?? lstExercises,
     );
   }
+
+  @override
+  String toString() =>
+      'ProductState { products: ${lstExercises.length}, isLoading: $isLoading, hasMaxReached: $hasReachedMax, page: $page }';
 }

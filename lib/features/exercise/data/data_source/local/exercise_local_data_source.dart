@@ -34,7 +34,7 @@ class ExerciseLocalDataSource {
   }
 
   // Get All Exercises
-  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(int page) async {
+  Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page) async {
     try {
       // Get from Hive
       final hiveExercises = await hiveService.getAllExercises(page);

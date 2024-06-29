@@ -1,4 +1,3 @@
-import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/home_viewmodel.dart';
@@ -13,7 +12,6 @@ class DashboardView extends ConsumerStatefulWidget {
 }
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
-  late bool isDark;
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -24,7 +22,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    var exerciseState = ref.watch(exerciseViewModelProvider);
+    final exerciseState = ref.watch(exerciseViewModelProvider);
+
     return NotificationListener<ScrollEndNotification>(
       onNotification: (notification) {
         if (_scrollController.position.extentAfter == 0) {
@@ -110,12 +109,13 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                                       onTap: () {},
                                       child: Container(
                                         alignment: Alignment.center,
-                                        child: Image.network(
-                                          '${ApiEndpoints.imageUrl}${exerciseState.lstExercises[index].exerciseVideo}',
+                                        child: Image.asset(
+                                          "assets/images/fitheal.png",
                                           width: 150,
                                           height: 100,
                                           fit: BoxFit.cover,
                                         ),
+                                        // '${ApiEndpoints.imageUrl}${exerciseState.lstExercises[index].exerciseVideo}',
                                       ),
                                     ),
                                   ),
@@ -147,21 +147,10 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                                           '${exerciseState.lstExercises[index].exerciseTime} minutes',
                                           style: const TextStyle(
                                             fontSize: 20,
-                                            color: Color(0xff009445),
+                                            color: Colors.orange,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.favorite_outline,
-                                          color: Color(0xff009445),
-                                        )
                                       ],
                                     ),
                                   ),
