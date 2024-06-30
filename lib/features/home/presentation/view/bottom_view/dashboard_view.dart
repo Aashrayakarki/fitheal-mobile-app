@@ -1,3 +1,4 @@
+import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/home_viewmodel.dart';
@@ -37,7 +38,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           actions: [
             IconButton(
               onPressed: () {
-                // ref.read(batchViewModelProvider.notifier).getBatches();
                 ref.read(exerciseViewModelProvider.notifier).resetState();
                 showMySnackBar(message: 'Refreshing...');
               },
@@ -55,14 +55,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                 color: Colors.white,
               ),
             ),
-            // Switch(
-            //     value: isDark,
-            //     onChanged: (value) {
-            //       setState(() {
-            //         isDark = value;
-            //         // ref.read(isDarkThemeProvider.notifier).updateTheme(value);
-            //       });
-            //     }),
           ],
         ),
         body: RefreshIndicator(
@@ -71,7 +63,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             ref.read(exerciseViewModelProvider.notifier).resetState();
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 Expanded(
@@ -85,10 +77,12 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                       return Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Container(
-                              width: 380,
-                              height: 150,
+                              width: double
+                                  .infinity, // Ensure the container takes full width
+                              height:
+                                  170, // Adjusted height to accommodate the new tag
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -104,24 +98,24 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 10),
+                                    padding: const EdgeInsets.only(right: 8),
                                     child: InkWell(
                                       onTap: () {},
                                       child: Container(
+                                        width:
+                                            240, // Set a fixed width for the image container
+                                        height:
+                                            150, // Set a fixed height for the image container
                                         alignment: Alignment.center,
-                                        child: Image.asset(
-                                          "assets/images/fitheal.png",
-                                          width: 150,
-                                          height: 100,
+                                        child: Image.network(
+                                          '${ApiEndpoints.imageUrl}${exerciseState.lstExercises[index].exerciseVideo}',
                                           fit: BoxFit.cover,
                                         ),
-                                        // '${ApiEndpoints.imageUrl}${exerciseState.lstExercises[index].exerciseVideo}',
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 0.45 *
-                                        MediaQuery.of(context).size.width,
+                                  Expanded(
+                                    // Use Expanded to let the text take the remaining space
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -135,13 +129,16 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold,
                                           ),
+                                          overflow: TextOverflow
+                                              .ellipsis, // Handle long text
                                         ),
                                         Text(
-                                          exerciseState.lstExercises[index]
-                                              .exerciseCalories,
+                                          '${exerciseState.lstExercises[index].exerciseCalories} calories',
                                           style: const TextStyle(
                                             fontSize: 16,
                                           ),
+                                          overflow: TextOverflow
+                                              .ellipsis, // Handle long text
                                         ),
                                         Text(
                                           '${exerciseState.lstExercises[index].exerciseTime} minutes',
@@ -149,6 +146,25 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                                             fontSize: 20,
                                             color: Colors.orange,
                                             fontWeight: FontWeight.bold,
+                                          ),
+                                          overflow: TextOverflow
+                                              .ellipsis, // Handle long text
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.blueAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Text(
+                                            exerciseState.lstExercises[index]
+                                                .exerciseLevel,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ],

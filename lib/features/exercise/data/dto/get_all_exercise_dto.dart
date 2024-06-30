@@ -6,10 +6,12 @@ part 'get_all_exercise_dto.g.dart';
 @JsonSerializable()
 class GetAllExerciseDto {
   final bool success;
+  final String message;
   final List<ExerciseApiModel> data;
 
   GetAllExerciseDto({
     required this.success,
+    required this.message,
     required this.data,
   });
 
