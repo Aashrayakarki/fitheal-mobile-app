@@ -53,6 +53,8 @@ dependencies:
   hive: ^2.2.3
   freezed: ^2.3.5
   json_annotation: ^4.9.0
+  all_sensors2: ^1.0.1
+
 
 
 dev_dependencies:
