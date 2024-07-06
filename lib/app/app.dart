@@ -1,6 +1,7 @@
 import 'package:final_assignment/app/navigator_key/navigator_key.dart';
 import 'package:final_assignment/app/themes/app_theme.dart';
-import 'package:final_assignment/features/splash/presentation/view/splash_view.dart';
+import 'package:final_assignment/features/sensors/proximity.dart';
+import 'package:final_assignment/features/sensors/sensor_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +15,10 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fit Heal',
       theme: AppTheme.getApplicationTheme(false),
-      home: const SplashView(),
+      home: const SensorDashboardScreen(),
+      routes: {
+        '/proximityScreen': (BuildContext context) => const ProximityScreen(),
+      },
     );
   }
 }
