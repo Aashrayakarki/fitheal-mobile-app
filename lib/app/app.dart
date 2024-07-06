@@ -1,5 +1,7 @@
 import 'package:final_assignment/app/navigator_key/navigator_key.dart';
 import 'package:final_assignment/app/themes/app_theme.dart';
+import 'package:final_assignment/features/sensors/accelerometer.dart';
+import 'package:final_assignment/features/sensors/gyroscope.dart';
 import 'package:final_assignment/features/sensors/proximity.dart';
 import 'package:final_assignment/features/sensors/sensor_dashboard.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class App extends ConsumerWidget {
       home: const SensorDashboardScreen(),
       routes: {
         '/proximityScreen': (BuildContext context) => const ProximityScreen(),
+        '/gyroscopeScreen': (BuildContext context) => const GyroscopeScreen(),
+        '/accelerometerScreen': (BuildContext context) => const AccelerometerScreen(),
       },
     );
   }
