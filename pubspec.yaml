@@ -54,6 +54,8 @@ dependencies:
   freezed: ^2.3.5
   json_annotation: ^4.9.0
   all_sensors2: ^1.0.1
+  mockito: ^5.4.4
+
 
 
 

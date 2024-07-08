@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:final_assignment/core/common/provider/internet_connectivity.dart';
 import 'package:final_assignment/core/failure/failure.dart';
@@ -19,7 +17,7 @@ final authRepositoryProvider = Provider<IAuthRepository>((ref) {
 });
 
 abstract class IAuthRepository {
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student);
-  Future<Either<Failure, bool>> loginStudent(String email, String password);
+  Future<Either<Failure, bool>> registerUser(AuthEntity user);
+  Future<Either<Failure, bool>> loginUser(String email, String password);
   Future<Either<Failure, AuthEntity>> getCurrentUser();
 }

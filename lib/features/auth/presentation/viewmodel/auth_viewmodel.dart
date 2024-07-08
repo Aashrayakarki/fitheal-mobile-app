@@ -27,9 +27,9 @@ class AuthViewModel extends StateNotifier<AuthState> {
   final HomeViewNavigator homeNavigator;
 
 
-  Future<void> registerStudent(AuthEntity user) async {
+  Future<void> registerUser(AuthEntity user) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.registerStudent(user);
+    var data = await authUseCase.registerUser(user);
     data.fold(
       (failure) {
         state = state.copyWith(
@@ -45,12 +45,12 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  loginStudent(
+  loginUser(
     String email,
     String password,
   ) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.loginStudent(email, password);
+    var data = await authUseCase.loginUser(email, password);
     data.fold(
       (failure) {
         state = state.copyWith(isLoading: false, error: failure.error);

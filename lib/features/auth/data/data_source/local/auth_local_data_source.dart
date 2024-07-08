@@ -6,26 +6,25 @@ import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authLocalDataSourceProvider = Provider((ref) => AuthLocalDataSource(
-    ref.read(hiveServiceProvider),
-    ref.read(authHiveModelProvider)));
+    ref.read(hiveServiceProvider), ref.read(authHiveModelProvider)));
 
 class AuthLocalDataSource {
   final HiveService _hiveService;
   final AuthHiveModel _authHiveModel;
 
-  AuthLocalDataSource(this._hiveService,  this._authHiveModel);
+  AuthLocalDataSource(this._hiveService, this._authHiveModel);
 
-  // Add Student
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
+  // Add user
+  Future<Either<Failure, bool>> registerUser(AuthEntity user) async {
     try {
-      await _hiveService.addUser(_authHiveModel.toHiveModel(student));
+      await _hiveService.addUser(_authHiveModel.toHiveModel(user));
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }
   }
 
-  Future<Either<Failure, bool>> loginStudent(
+  Future<Either<Failure, bool>> loginUser(
     String email,
     String password,
   ) async {

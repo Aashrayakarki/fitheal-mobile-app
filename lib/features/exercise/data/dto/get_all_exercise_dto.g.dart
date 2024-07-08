@@ -19,4 +19,5 @@ Map<String, dynamic> _$GetAllExerciseDtoToJson(GetAllExerciseDto instance) =>
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
+      'data': instance.data,
     };

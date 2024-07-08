@@ -182,7 +182,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       onPressed: () {
                         if (_key.currentState!.validate()) {
                           // Register
-                          var student = AuthEntity(
+                          var user = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
                             phone: _phoneController.text,
@@ -191,7 +191,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           );
                           ref
                               .read(authViewModelProvider.notifier)
-                              .registerStudent(student);
+                              .registerUser(user);
                         }
                       },
                       style: ElevatedButton.styleFrom(
