@@ -15,6 +15,8 @@ import 'auth_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<AuthUseCase>(),
   MockSpec<LoginViewNavigator>(),
+  MockSpec<RegisterViewNavigator>(),
+  MockSpec<HomeViewNavigator>(),
 ])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
