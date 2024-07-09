@@ -8,7 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'exercise_test.mocks.dart';
-import 'test_data/batch_exercise_data.dart';
+import 'test_data/exercise_entity_data.dart';
 
 @GenerateNiceMocks([
   MockSpec<ExerciseUseCase>(),
