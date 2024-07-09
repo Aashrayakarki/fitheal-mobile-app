@@ -3,7 +3,7 @@ class ApiEndpoints {
 
   static const Duration connectionTimeout = Duration(seconds: 1000);
   static const Duration receiveTimeout = Duration(seconds: 1000);
-  static const String baseUrl = "http://10.12.17.75:5000/api/";
+  static const String baseUrl = "http://192.168.1.19:5000/api/";
   // static const String baseUrl = "http://10.12.17.71:5000/api/";
 
   // static const String baseUrl = "http://localhost:3000/api/v1/";
@@ -17,9 +17,9 @@ class ApiEndpoints {
 
   // ====================== Exercise Routes ======================
   static const String createExercise = "exercise/create";
-  static const String getAllExercises = "exercise/pagination";
+  static const String getAllExercises = "exercise/pagination_exercise";
   static const String deleteExercise = "exercise/";
-  static const String imageUrl = "http://10.12.17.75:5000/products/";
+  static const String imageUrl = "http://192.168.1.19:5000/products/";
 
   static const limitPage = 4;
 

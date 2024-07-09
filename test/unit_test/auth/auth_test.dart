@@ -76,14 +76,14 @@ void main() {
 
   test('login test with valid username and password', () async {
     // Arrange
-    const correctUsername = 'kiran';
-    const correctPassword = 'kiran123';
+    const correctEmail = 'test';
+    const correctPassword = 'test';
 
     when(mockAuthUsecase.loginUser(any, any)).thenAnswer((invocation) {
-      final username = invocation.positionalArguments[0] as String;
+      final email = invocation.positionalArguments[0] as String;
       final password = invocation.positionalArguments[1] as String;
       return Future.value(
-          username == correctUsername && password == correctPassword
+          email == correctEmail && password == correctPassword
               ? const Right(true)
               : Left(Failure(error: 'Invalid')));
     });
@@ -91,7 +91,7 @@ void main() {
     // Act
     await container
         .read(authViewModelProvider.notifier)
-        .loginUser('kiran', 'kiran123');
+        .loginUser('test', 'test');
 
     final authState = container.read(authViewModelProvider);
 
