@@ -1,15 +1,11 @@
 import 'package:final_assignment/core/common/my_snackbar.dart';
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
-import 'package:final_assignment/features/exercise/domain/usecases/exercise_usecase.dart';
-import 'package:final_assignment/features/exercise/presentation/state/exercise_state.dart';
 import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
 import 'package:final_assignment/features/meal_plan/domain/usecases/meal_usecase.dart';
 import 'package:final_assignment/features/meal_plan/presentation/state/meal_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final mealViewModelProvider =
-    StateNotifierProvider<MealViewModel, MealState>(
+final mealViewModelProvider = StateNotifierProvider<MealViewModel, MealState>(
   (ref) => MealViewModel(
     ref.read(mealUseCaseProvider),
   ),
@@ -18,7 +14,7 @@ final mealViewModelProvider =
 class MealViewModel extends StateNotifier<MealState> {
   final MealUsecase mealUseCase;
 
-Future resetState() async {
+  Future resetState() async {
     state = MealState.initial();
     getAllMeals();
   }
