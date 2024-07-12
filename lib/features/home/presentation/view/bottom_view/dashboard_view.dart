@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:all_sensors2/all_sensors2.dart';
 import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
@@ -16,10 +19,80 @@ class DashboardView extends ConsumerStatefulWidget {
 class _DashboardViewState extends ConsumerState<DashboardView> {
   final ScrollController _scrollController = ScrollController();
 
+  List<double> _gyroscopeValues = [];
+  final List<StreamSubscription<dynamic>> _streamSubscriptions = [];
+  bool showYesNoDialog = true;
+  bool isDialogShowing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _streamSubscriptions.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
+      setState(() {
+        _gyroscopeValues = <double>[event.x, event.y, event.z];
+        _logGyroscopeValues();
+
+        _checkGyroscopeValues(_gyroscopeValues);
+      });
+    }));
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
+    for (var subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
     super.dispose();
+  }
+
+  void _logGyroscopeValues() {
+    print(
+        'Gyroscope values: x=${_gyroscopeValues[0]}, y=${_gyroscopeValues[1]}, z=${_gyroscopeValues[2]}');
+  }
+
+  void _checkGyroscopeValues(List<double> values) async {
+    const double threshold = 1; // Example threshold value, adjust as needed
+    if (values.any((value) => value.abs() > threshold)) {
+      if (showYesNoDialog && !isDialogShowing) {
+        isDialogShowing = true;
+        final result = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Logout'),
+              content: const Text('Are You Sure You Want To Logout?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  child: const Text('Yes'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: const Text('No'),
+                ),
+              ],
+            );
+          },
+        );
+
+        isDialogShowing = false;
+        if (result == true) {
+          print('User confirmed logout');
+          ref.read(homeViewModelProvider.notifier).logout();
+          showMySnackBar(
+            message: 'Logged Out Successfully!',
+            color: Colors.green,
+          );
+        } else {
+          print('User cancelled logout');
+        }
+      }
+    }
   }
 
   @override
@@ -37,7 +110,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Dashboard View'),
           actions: [
             IconButton(
               onPressed: () {

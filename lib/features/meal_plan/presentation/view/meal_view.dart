@@ -1,18 +1,17 @@
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
-import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
-import 'package:final_assignment/features/exercise/presentation/widgets/load_exercise.dart';
+import 'dart:io';
+
 import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
 import 'package:final_assignment/features/meal_plan/presentation/viewmodel/meal_view_model.dart';
 import 'package:final_assignment/features/meal_plan/presentation/widgets/load_meal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MealView extends ConsumerStatefulWidget {
   const MealView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddMealViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddMealViewState();
 }
 
 class _AddMealViewState extends ConsumerState<MealView> {
@@ -21,9 +20,20 @@ class _AddMealViewState extends ConsumerState<MealView> {
   final mealCaloriesController = TextEditingController();
   final mealProteinsController = TextEditingController();
   final mealCarbsController = TextEditingController();
-  final mealImageController = TextEditingController();
+  File? mealImageFile; // Holds the selected meal image file
 
   var gap = const SizedBox(height: 8);
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        mealImageFile = File(pickedFile.path);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var mealState = ref.watch(mealViewModelProvider);
@@ -118,18 +128,26 @@ class _AddMealViewState extends ConsumerState<MealView> {
                 },
               ),
               gap,
-              TextFormField(
-                controller: mealImageController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Meal Image',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please upload meal image';
-                  }
-                  return null;
-                },
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      readOnly: true,
+                      controller: TextEditingController(
+                        text: mealImageFile != null ? mealImageFile!.path : '',
+                      ),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Meal Image',
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.attach_file),
+                    onPressed: _pickImage,
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -142,11 +160,10 @@ class _AddMealViewState extends ConsumerState<MealView> {
                       mealCalories: mealCaloriesController.text,
                       mealProteins: mealProteinsController.text,
                       mealCarbs: mealCarbsController.text,
-                      mealImage: mealImageController.text,
-                        );
-                    ref
-                        .read(mealViewModelProvider.notifier)
-                        .addMeal(meal);
+                      mealImage:
+                          mealImageFile != null ? mealImageFile!.path : '',
+                    );
+                    ref.read(mealViewModelProvider.notifier).addMeal(meal);
                   },
                   child: const Text('Add Meal'),
                 ),
