@@ -1,6 +1,7 @@
 import 'package:final_assignment/app/constants/hive_table_constant.dart';
 import 'package:final_assignment/features/auth/data/model/auth_hive_model.dart';
 import 'package:final_assignment/features/exercise/data/model/exercise_hive_model.dart';
+import 'package:final_assignment/features/meal_plan/data/model/meal_hive_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';

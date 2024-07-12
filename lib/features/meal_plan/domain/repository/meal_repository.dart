@@ -22,7 +22,7 @@ final mealRepositoryProvider = Provider<IMealRepository>(
 
 abstract class IMealRepository {
   Future<Either<Failure, bool>> addMeal(MealEntity meal);
-  Future<Either<Failure, List<ExerciseEntity>>> getAllMeals(page);
+  Future<Either<Failure, List<MealEntity>>> getAllMeals(page);
   Future<Either<Failure, bool>> deleteMeal(String id);
 }
 
