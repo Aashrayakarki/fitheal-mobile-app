@@ -4,13 +4,12 @@ import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/core/failure/failure.dart';
 import 'package:final_assignment/core/networking/remote/http_service.dart';
 import 'package:final_assignment/core/shared_prefs/user_shared_prefs.dart';
-import 'package:final_assignment/features/exercise/data/dto/get_all_exercise_dto.dart';
-import 'package:final_assignment/features/exercise/data/model/exercise_api_model.dart';
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
+import 'package:final_assignment/features/meal_plan/data/dto/get_all_meal_dto.dart';
+import 'package:final_assignment/features/meal_plan/data/model/meal_api_model.dart';
+import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final mealRemoteDataSourceProvider =
-    Provider<MealRemoteDataSource>((ref) {
+final mealRemoteDataSourceProvider = Provider<MealRemoteDataSource>((ref) {
   final dio = ref.read(httpServiceProvider);
   final mealApiModel = ref.read(mealApiModelProvider);
   final userSharedPrefs = ref.read(userSharedPrefsProvider);

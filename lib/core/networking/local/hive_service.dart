@@ -15,6 +15,7 @@ class HiveService {
     // Register Adapters
     Hive.registerAdapter(AuthHiveModelAdapter());
     Hive.registerAdapter(ExerciseHiveModelAdapter());
+    Hive.registerAdapter(MealHiveModelAdapter());
   }
 
   // ============= User Queries
@@ -50,6 +51,20 @@ class HiveService {
     box.close();
     return exercises;
   }
+
+    // ======================== Meal Queries ========================
+  Future<void> addMeal(MealHiveModel meal) async {
+    var box = await Hive.openBox<MealHiveModel>(HiveTableConstant.mealBox);
+    await box.put(meal.mealId, meal);
+  }
+
+  Future<List<MealHiveModel>> getAllMeals(int page) async {
+    var box = await Hive.openBox<MealHiveModel>(HiveTableConstant.mealBox);
+    var meals = box.values.toList();
+    box.close();
+    return meals;
+  }
+
 
 }
 

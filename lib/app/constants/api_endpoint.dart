@@ -14,12 +14,17 @@ class ApiEndpoints {
   static const String register = "user/register";
   static const String currentUser = "user/getMe";
   static const String uploadImage = "user/uploadVideo";
+    static const String imageUrl = "http://192.168.1.19:5000/products/";
 
   // ====================== Exercise Routes ======================
   static const String createExercise = "exercise/create";
   static const String getAllExercises = "exercise/pagination_exercise";
   static const String deleteExercise = "exercise/";
-  static const String imageUrl = "http://192.168.1.19:5000/products/";
+
+  // ====================== Meal Routes ======================
+  static const String createMeal = "meal/create";
+  static const String getAllMeals = "meal/pagination_meal";
+  static const String deleteMeal = "meal/";
 
   static const limitPage = 4;
 
