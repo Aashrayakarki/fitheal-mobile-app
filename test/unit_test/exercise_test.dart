@@ -35,10 +35,10 @@ void main() {
 
   // Test initial state
   test('check exercise initial state', () async {
-    when(mockExerciseUseCase.getAllExercises())
+    when(mockExerciseUseCase.getAllExercises(any))
         .thenAnswer((_) => Future.value(Right(lstExercises)));
 
-    // Get all batches
+    // Get all exercises
     await container.read(exerciseViewModelProvider.notifier).getAllExercises();
 
     // Store the state
@@ -52,7 +52,7 @@ void main() {
 
   // Remove snackbar code from viewmodel vefore running this code
   test('add exercise entity and return true if successfully added', () async {
-    when(mockExerciseUseCase.getAllExercises())
+    when(mockExerciseUseCase.getAllExercises(any))
         .thenAnswer((_) => Future.value(Right(lstExercises)));
 
     when(mockExerciseUseCase.addExercise(lstExercises[0]))
@@ -71,5 +71,3 @@ void main() {
     container.dispose();
   });
 }
-
-
