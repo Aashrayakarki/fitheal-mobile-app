@@ -4,10 +4,10 @@ class ForgotPasswordScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
-  ForgotPasswordScreen({super.key});
+  ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forgot Password'),
@@ -34,7 +34,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
                   }
-                  // You can add more email validation here
+                  // You can add more email validation here if needed
                   return null;
                 },
               ),
@@ -42,11 +42,12 @@ class ForgotPasswordScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Handle forgot password logic here
-                    print('Email: ${_emailController.text}');
+                    // Here you would call a function to send a password reset link
+                    _sendPasswordResetEmail(_emailController.text);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                          content: Text('Password reset link sent!')),
+                        content: Text('Password reset link sent!'),
+                      ),
                     );
                   }
                 },
@@ -57,5 +58,9 @@ class ForgotPasswordScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _sendPasswordResetEmail(String email) {
+    print('Sending password reset email to $email');
   }
 }

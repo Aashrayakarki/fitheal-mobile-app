@@ -14,7 +14,8 @@ class ApiEndpoints {
   static const String register = "user/register";
   static const String currentUser = "user/getMe";
   static const String uploadImage = "user/uploadVideo";
-    static const String imageUrl = "http://192.168.1.4:5000/products/";
+  static const String imageUrl = "http://192.168.1.4:5000/products/";
+  static const String forgotPassword = "user/forgot_password";
 
   // ====================== Exercise Routes ======================
   static const String createExercise = "exercise/create";
