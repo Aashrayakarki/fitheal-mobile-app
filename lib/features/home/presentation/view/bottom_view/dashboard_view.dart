@@ -211,7 +211,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                     ),
                     image: DecorationImage(
                       image: NetworkImage(
-                          '${ApiEndpoints.imageUrl}${exercise.exerciseVideo}'),
+                          '${ApiEndpoints.imageUrl}${exercise.exerciseThumbnail}'),
                       fit: BoxFit.cover,
                     ),
                   ),

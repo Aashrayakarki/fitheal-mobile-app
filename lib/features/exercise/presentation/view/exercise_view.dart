@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/exercise/presentation/widgets/load_exercise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ExerciseView extends ConsumerStatefulWidget {
   const ExerciseView({super.key});
@@ -18,6 +21,17 @@ class _AddExerciseViewState extends ConsumerState<ExerciseView> {
   final exerciseCaloriesController = TextEditingController();
   final exerciseLevelController = TextEditingController();
   final exerciseVideoController = TextEditingController();
+  File? exerciseThumbnailFile;
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        exerciseThumbnailFile = File(pickedFile.path);
+      });
+    }
+  }
 
   var gap = const SizedBox(height: 8);
   @override
@@ -100,18 +114,26 @@ class _AddExerciseViewState extends ConsumerState<ExerciseView> {
                 },
               ),
               gap,
-              TextFormField(
-                controller: exerciseVideoController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Exercise Video',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter exercise video';
-                  }
-                  return null;
-                },
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      readOnly: true,
+                      controller: TextEditingController(
+                        text: exerciseThumbnailFile != null ? exerciseThumbnailFile!.path : '',
+                      ),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Exercise Thumbnail',
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.attach_file),
+                    onPressed: _pickImage,
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -123,7 +145,9 @@ class _AddExerciseViewState extends ConsumerState<ExerciseView> {
                         exerciseTime: exerciseTimeController.text,
                         exerciseCalories: exerciseCaloriesController.text,
                         exerciseLevel: exerciseLevelController.text,
-                        exerciseVideo: exerciseVideoController.text);
+                        exerciseThumbnail:
+                          exerciseThumbnailFile != null ? exerciseThumbnailFile!.path : '',
+                        );
                     ref
                         .read(exerciseViewModelProvider.notifier)
                         .addExercise(exercise);

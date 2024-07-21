@@ -20,7 +20,7 @@ class _AddMealViewState extends ConsumerState<MealView> {
   final mealCaloriesController = TextEditingController();
   final mealProteinsController = TextEditingController();
   final mealCarbsController = TextEditingController();
-  File? mealImageFile; // Holds the selected meal image file
+  File? mealImageFile; 
 
   var gap = const SizedBox(height: 8);
 

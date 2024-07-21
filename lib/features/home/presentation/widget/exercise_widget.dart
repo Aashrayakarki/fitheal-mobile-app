@@ -20,7 +20,7 @@ class ExerciseWidget extends StatelessWidget {
           color: Colors.yellow[100],
           child: Center(
             child: Text(
-              '${exerciseList[index].exerciseName}, ${exerciseList[index].exerciseTime}, ${exerciseList[index].exerciseCalories}, ${exerciseList[index].exerciseLevel}, ${exerciseList[index].exerciseVideo}',
+              '${exerciseList[index].exerciseName}, ${exerciseList[index].exerciseTime}, ${exerciseList[index].exerciseCalories}, ${exerciseList[index].exerciseLevel}, ${exerciseList[index].exerciseThumbnail}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

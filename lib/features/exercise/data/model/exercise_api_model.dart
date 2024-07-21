@@ -14,7 +14,7 @@ class ExerciseApiModel {
   final String exerciseTime;
   final String exerciseCalories;
   final String exerciseLevel;
-  final String exerciseVideo;
+  final String exerciseThumbnail;
 
   ExerciseApiModel({
     required this.exerciseId,
@@ -22,7 +22,7 @@ class ExerciseApiModel {
     required this.exerciseTime,
     required this.exerciseCalories,
     required this.exerciseLevel,
-    required this.exerciseVideo,
+    required this.exerciseThumbnail,
   });
 
   // Empty constructor
@@ -32,7 +32,7 @@ class ExerciseApiModel {
         exerciseTime = '',
         exerciseCalories = '',
         exerciseLevel = '',
-        exerciseVideo = '';
+        exerciseThumbnail = '';
 
   factory ExerciseApiModel.fromJson(Map<String, dynamic> json) {
     return ExerciseApiModel(
@@ -41,7 +41,7 @@ class ExerciseApiModel {
       exerciseTime: json['exerciseTime'],
       exerciseCalories: json['exerciseCalories'],
       exerciseLevel: json['exerciseLevel'],
-      exerciseVideo: json['exerciseVideo'],
+      exerciseThumbnail: json['exerciseThumbnail'],
     );
   }
 
@@ -51,7 +51,7 @@ class ExerciseApiModel {
       'exerciseTime': exerciseTime,
       'exerciseCalories': exerciseCalories,
       'exerciseLevel': exerciseLevel,
-      'exerciseVideo': exerciseVideo,
+      'exerciseThumbnail': exerciseThumbnail,
     };
   }
 
@@ -62,7 +62,7 @@ class ExerciseApiModel {
         exerciseTime: exerciseTime,
         exerciseCalories: exerciseCalories,
         exerciseLevel: exerciseLevel,
-        exerciseVideo: exerciseVideo,
+        exerciseThumbnail: exerciseThumbnail,
       );
 
   // Convert Entity to API Object
@@ -72,7 +72,7 @@ class ExerciseApiModel {
         exerciseTime: entity.exerciseTime,
         exerciseCalories: entity.exerciseCalories,
         exerciseLevel: entity.exerciseLevel,
-        exerciseVideo: entity.exerciseVideo,
+        exerciseThumbnail: entity.exerciseThumbnail,
       );
 
   // Convert API List to Entity List

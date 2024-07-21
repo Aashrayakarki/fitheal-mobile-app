@@ -11,7 +11,7 @@ class ExerciseTestData {
         exerciseTime: "10",
         exerciseCalories: "100",
         exerciseLevel: "Beginner",
-        exerciseVideo: "https://www.youtube.com/watch?v=IODxDxX7oi4",
+        exerciseThumbnail: "https://www.youtube.com/watch?v=IODxDxX7oi4",
       ),
       const ExerciseEntity(
         exerciseId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
@@ -19,12 +19,10 @@ class ExerciseTestData {
         exerciseTime: "10",
         exerciseCalories: "100",
         exerciseLevel: "Beginner",
-        exerciseVideo: "https://www.youtube.com/watch?v=IODxDxX7oi4",
+        exerciseThumbnail: "https://www.youtube.com/watch?v=IODxDxX7oi4",
       ),
     ];
 
     return lstExercises;
   }
 }
-
-

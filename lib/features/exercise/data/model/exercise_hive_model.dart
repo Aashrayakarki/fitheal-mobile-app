@@ -28,7 +28,7 @@ class ExerciseHiveModel {
   final String exerciseLevel;
 
   @HiveField(5)
-  final String exerciseVideo;
+  final String exerciseThumbnail;
 
   // empty constructor
   ExerciseHiveModel.empty()
@@ -38,7 +38,7 @@ class ExerciseHiveModel {
             exerciseTime: '',
             exerciseCalories: '',
             exerciseLevel: '',
-            exerciseVideo: '');
+            exerciseThumbnail: '');
 
   ExerciseHiveModel({
     String? exerciseId,
@@ -46,7 +46,7 @@ class ExerciseHiveModel {
     required this.exerciseTime,
     required this.exerciseCalories,
     required this.exerciseLevel,
-    required this.exerciseVideo,
+    required this.exerciseThumbnail,
   }) : exerciseId = exerciseId ?? const Uuid().v4();
 
   ExerciseEntity toEntity() {
@@ -56,7 +56,7 @@ class ExerciseHiveModel {
       exerciseTime: exerciseTime,
       exerciseCalories: exerciseCalories,
       exerciseLevel: exerciseLevel,
-      exerciseVideo: exerciseVideo,
+      exerciseThumbnail: exerciseThumbnail,
     );
   }
 
@@ -67,7 +67,7 @@ class ExerciseHiveModel {
       exerciseTime: entity.exerciseTime,
       exerciseCalories: entity.exerciseCalories,
       exerciseLevel: entity.exerciseLevel,
-      exerciseVideo: entity.exerciseVideo,
+      exerciseThumbnail: entity.exerciseThumbnail,
     );
   }
 
@@ -82,6 +82,6 @@ class ExerciseHiveModel {
 
   @override
   String toString() {
-    return 'exerciseId: $exerciseId, exerciseName: $exerciseName, exerciseTime: $exerciseTime, exerciseCalories: $exerciseCalories, exerciseLevel: $exerciseLevel, exerciseVideo: $exerciseVideo';
+    return 'exerciseId: $exerciseId, exerciseName: $exerciseName, exerciseTime: $exerciseTime, exerciseCalories: $exerciseCalories, exerciseLevel: $exerciseLevel, exerciseThumbnail: $exerciseThumbnail';
   }
 }
