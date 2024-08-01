@@ -30,6 +30,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _heightController = TextEditingController();
+  final _weightController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _genderController = TextEditingController();
 
   bool isObscure = true;
 
@@ -174,6 +178,50 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     obscureText: isObscure,
                     icon: isObscure ? Icons.visibility : Icons.visibility_off,
                   ),
+                  _buildTextFormField(
+                    labelText: 'Height:',
+                    hintText: 'Enter your height',
+                    controller: _heightController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your height';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFormField(
+                    labelText: 'Weight:',
+                    hintText: 'Enter your Weight',
+                    controller: _weightController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your Weight';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFormField(
+                    labelText: 'Age:',
+                    hintText: 'Enter your age',
+                    controller: _ageController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your age';
+                      }
+                      return null;
+                    },
+                  ),
+                  _buildTextFormField(
+                    labelText: 'Gender:',
+                    hintText: 'Enter your gender',
+                    controller: _genderController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your gender';
+                      }
+                      return null;
+                    },
+                  ),
                   _gap,
                   _gap,
                   SizedBox(
@@ -188,6 +236,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             phone: _phoneController.text,
                             email: _emailController.text,
                             password: _passwordController.text,
+                            height: _heightController.text,
+                            weight: _weightController.text,
+                            age: _ageController.text,
+                            gender: _genderController.text,
                           );
                           ref
                               .read(authViewModelProvider.notifier)

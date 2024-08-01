@@ -31,6 +31,10 @@ class AuthRemoteDataSource {
           "phone": user.phone,
           "email": user.email,
           "password": user.password,
+          "height": user.height,
+          "weight": user.weight,
+          "age": user.age,
+          "gender":user.gender
         },
       );
       if (response.statusCode == 200) {
