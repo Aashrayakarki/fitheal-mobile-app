@@ -10,7 +10,7 @@ class ApiEndpoints {
   // ====================== Auth Routes ======================
   static const String login = "user/login";
   static const String register = "user/register";
-  static const String currentUser = "user/get_single_user/:id";
+  static const String currentUser = "user/get_single_user";
   static const String uploadImage = "user/uploadThumbnail";
   static const String forgotPassword = "user/forgot_password";
 

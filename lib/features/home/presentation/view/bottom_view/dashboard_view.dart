@@ -107,7 +107,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                         children: [
                           ElevatedButton(
                             onPressed: _nextExercisePage,
-                            child: const Text('Next'),
+                            child: const Text('Show more exercises'),
                           ),
                         ],
                       ),
@@ -137,7 +137,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                         children: [
                           ElevatedButton(
                             onPressed: _nextMealPage,
-                            child: const Text('Next'),
+                            child: const Text('Show more meal plans'),
                           ),
                         ],
                       ),

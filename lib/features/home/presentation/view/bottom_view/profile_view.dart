@@ -32,11 +32,46 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             //   height: 300,
             //   width: 300,
             //   child: Image.network(
-                  // '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
+            // '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
             // ),
             const SizedBox(height: 10),
             Text(
               "First Name : ${currentUser.authEntity?.fname ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Last Name : ${currentUser.authEntity?.lname ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Height : ${currentUser.authEntity?.height ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Weight : ${currentUser.authEntity?.weight ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Age : ${currentUser.authEntity?.age ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Gender : ${currentUser.authEntity?.gender ?? ""}",
               style: const TextStyle(
                 fontSize: 30,
               ),
@@ -47,4 +82,3 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
     }
   }
 }
-
