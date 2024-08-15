@@ -49,23 +49,9 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     ref.read(exerciseViewModelProvider.notifier).getAllExercises();
   }
 
-  void _previousExercisePage() {
-    setState(() {
-      if (_exercisePage > 1) _exercisePage--;
-    });
-    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
-  }
-
   void _nextMealPage() {
     setState(() {
       _mealPage++;
-    });
-    ref.read(mealViewModelProvider.notifier).getAllMeals();
-  }
-
-  void _previousMealPage() {
-    setState(() {
-      if (_mealPage > 1) _mealPage--;
     });
     ref.read(mealViewModelProvider.notifier).getAllMeals();
   }
@@ -120,11 +106,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: _previousExercisePage,
-                            child: const Text('Previous'),
-                          ),
-                          const SizedBox(width: 16),
-                          ElevatedButton(
                             onPressed: _nextExercisePage,
                             child: const Text('Next'),
                           ),
@@ -154,11 +135,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            onPressed: _previousMealPage,
-                            child: const Text('Previous'),
-                          ),
-                          const SizedBox(width: 16),
                           ElevatedButton(
                             onPressed: _nextMealPage,
                             child: const Text('Next'),
