@@ -1,4 +1,3 @@
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';

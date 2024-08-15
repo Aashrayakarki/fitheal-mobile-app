@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:final_assignment/core/common/provider/internet_connectivity.dart';
 import 'package:final_assignment/core/failure/failure.dart';
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
 import 'package:final_assignment/features/meal_plan/data/repository/local/meal_local_repository.dart';
 import 'package:final_assignment/features/meal_plan/data/repository/remote/meal_remote_repository.dart';
 import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
