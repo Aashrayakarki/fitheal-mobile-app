@@ -15,74 +15,159 @@ class DashboardView extends ConsumerStatefulWidget {
 }
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
-  late bool isDark;
+  final ScrollController _scrollController = ScrollController();
+  int _exercisePage = 1;
+  int _mealPage = 1;
+
   @override
   void initState() {
-    // isDark = ref.read(isDarkThemeProvider);
-    isDark = false;
     super.initState();
+    _scrollController.addListener(_scrollListener);
+    // Initial data fetch
+    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+    ref.read(mealViewModelProvider.notifier).getAllMeals();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+      ref.read(mealViewModelProvider.notifier).getAllMeals();
+    }
+  }
+
+  void _nextExercisePage() {
+    setState(() {
+      _exercisePage++;
+    });
+    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+  }
+
+  void _previousExercisePage() {
+    setState(() {
+      if (_exercisePage > 1) _exercisePage--;
+    });
+    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+  }
+
+  void _nextMealPage() {
+    setState(() {
+      _mealPage++;
+    });
+    ref.read(mealViewModelProvider.notifier).getAllMeals();
+  }
+
+  void _previousMealPage() {
+    setState(() {
+      if (_mealPage > 1) _mealPage--;
+    });
+    ref.read(mealViewModelProvider.notifier).getAllMeals();
   }
 
   @override
   Widget build(BuildContext context) {
-    var exerciseState = ref.watch(exerciseViewModelProvider);
-    var mealState = ref.watch(mealViewModelProvider);
+    final exerciseState = ref.watch(exerciseViewModelProvider);
+    final mealState = ref.watch(mealViewModelProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard View'),
         actions: [
           IconButton(
             onPressed: () {
-              // ref.read(batchViewModelProvider.notifier).getBatches();
-              // ref.read(courseViewModelProvider.notifier).getCourses();
+              ref.read(exerciseViewModelProvider.notifier).resetState();
+              ref.read(mealViewModelProvider.notifier).resetState();
               showMySnackBar(message: 'Refreshing...');
             },
-            icon: const Icon(
-              Icons.refresh,
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.refresh, color: Colors.white),
           ),
           IconButton(
             onPressed: () {
               ref.read(homeViewModelProvider.notifier).logout();
             },
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.logout, color: Colors.white),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Exercises Available',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              'Exercises Available',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ExerciseWidget(
+                      ref: ref,
+                      exerciseList: exerciseState.lstExercises,
+                    ),
+                  ),
+                  if (exerciseState.lstExercises.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: _previousExercisePage,
+                            child: const Text('Previous'),
+                          ),
+                          const SizedBox(width: 16),
+                          ElevatedButton(
+                            onPressed: _nextExercisePage,
+                            child: const Text('Next'),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
             ),
-            Flexible(
-              child: ExerciseWidget(
-                  ref: ref, exerciseList: exerciseState.lstExercises),
+            const SizedBox(height: 16),
+            const Text(
+              'Meal Plans Available',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Meal Plans Available',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: MealWidget(
+                      ref: ref,
+                      mealList: mealState.lstMeals,
+                    ),
+                  ),
+                  if (mealState.lstMeals.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: _previousMealPage,
+                            child: const Text('Previous'),
+                          ),
+                          const SizedBox(width: 16),
+                          ElevatedButton(
+                            onPressed: _nextMealPage,
+                            child: const Text('Next'),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
-            ),
-            Flexible(
-              child: MealWidget(ref: ref, mealList: mealState.lstMeals),
             ),
           ],
         ),
