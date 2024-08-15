@@ -2,8 +2,8 @@ import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/home_viewmodel.dart';
 import 'package:final_assignment/features/home/presentation/widget/exercise_widget.dart';
+import 'package:final_assignment/features/home/presentation/widget/meal_widget.dart';
 import 'package:final_assignment/features/meal_plan/presentation/viewmodel/meal_view_model.dart';
-import 'package:final_assignment/features/meal_plan/presentation/widgets/load_meal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -60,7 +60,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Exercises',
+                'Exercises Available',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -68,12 +68,13 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               ),
             ),
             Flexible(
-              child: ExerciseWidget(exerciseList: exerciseState.lstExercises),
+              child: ExerciseWidget(
+                  ref: ref, exerciseList: exerciseState.lstExercises),
             ),
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Meals',
+                'Meal Plans Available',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -81,7 +82,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               ),
             ),
             Flexible(
-              child: LoadMeal(lstMeal: mealState.lstMeals, ref: ref),
+              child: MealWidget(ref: ref, mealList: mealState.lstMeals),
             ),
           ],
         ),
