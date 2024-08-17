@@ -12,10 +12,56 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _gap = const SizedBox(height: 8);
   bool isObscure = true;
+
+  InputDecoration _inputDecoration(String hintText, {IconData? icon}) {
+    return InputDecoration(
+      hintText: hintText,
+      hintStyle: const TextStyle(color: Colors.black45),
+      filled: true,
+      fillColor: Colors.orange.withOpacity(0.1),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.orange, width: 2),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.orangeAccent, width: 1),
+      ),
+      suffixIcon: icon != null ? Icon(icon, color: Colors.orangeAccent) : null,
+      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+    );
+  }
+
+  Widget _buildTextFormField({
+    required String labelText,
+    required String hintText,
+    required TextEditingController controller,
+    required String? Function(String?) validator,
+    bool obscureText = false,
+    IconData? icon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          labelText,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        _gap,
+        TextFormField(
+          controller: controller,
+          decoration: _inputDecoration(hintText, icon: icon),
+          validator: validator,
+          obscureText: obscureText,
+        ),
+        _gap,
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +73,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
           child: Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     const Image(
@@ -35,7 +81,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       height: 140,
                       width: 200,
                     ),
-                    _gap, _gap, //gap
+                    _gap,
                     const Text(
                       'Welcome to Fitheal',
                       style: TextStyle(
@@ -47,50 +93,41 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       'Hello there, sign in to continue!',
                       style: TextStyle(
                         fontSize: 16,
+                        color: Colors.grey,
                       ),
                     ),
-                    _gap, _gap, _gap, _gap, _gap, _gap, //gap
-                    TextFormField(
-                      key: const ValueKey('username'),
-                      controller: _usernameController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Username',
-                        suffixIcon: Icon(Icons.person)
-                      ),
+                    _gap, _gap,
+                    _buildTextFormField(
+                      labelText: 'Email address:',
+                      hintText: 'Enter your email address',
+                      controller: _emailController,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter username';
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email address';
+                        }
+                        // Regex pattern for email validation
+                        final RegExp emailRegex = RegExp(
+                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                        );
+                        if (!emailRegex.hasMatch(value)) {
+                          return 'Please enter a valid email address';
                         }
                         return null;
                       },
+                      icon: Icons.person,
                     ),
-                    _gap, _gap, _gap, _gap, //gap
-                    TextFormField(
-                      key: const ValueKey('password'),
+                    _buildTextFormField(
+                      labelText: 'Password:',
+                      hintText: 'Enter your password',
                       controller: _passwordController,
-                      obscureText: authState.obscurePassword,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            authState.obscurePassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            ref
-                                .read(authViewModelProvider.notifier)
-                                .obsurePassword();
-                          },
-                        ),
-                      ),
-                      validator: ((value) {
+                      validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter password';
+                          return 'Please enter your password';
                         }
                         return null;
-                      }),
+                      },
+                      obscureText: isObscure,
+                      icon: isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
                     _gap,
                     Align(
@@ -107,16 +144,16 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    _gap, _gap,
                     ElevatedButton(
-                      onPressed: () {
-                        {
-                          if (_formKey.currentState!.validate()) {
-                            ref.read(authViewModelProvider.notifier).login(
-                                  username: _usernameController.text,
-                                  password: _passwordController.text,
-                                );
-                          }
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .loginStudent(
+                                _emailController.text,
+                                _passwordController.text,
+                              );
                         }
                       },
                       child: const SizedBox(
@@ -133,7 +170,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                    _gap, _gap, //gap
+                    _gap, //gap
 
                     const Text(
                       'Or Login with',
@@ -142,7 +179,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       ),
                     ),
 
-                    _gap, _gap, //gap
+                    _gap,
 
                     ElevatedButton(
                       onPressed: () {},
@@ -209,30 +246,32 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         ),
                       ),
                     ),
-                    _gap, _gap, _gap, _gap, //gap
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Register',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                ref
-                                    .read(authViewModelProvider.notifier)
-                                    .openRegisterView();
-                              },
+                    _gap, _gap, //gap
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                              text: 'Register',
+                              style: const TextStyle(
+                                color: Colors.orange,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  ref
+                                      .read(authViewModelProvider.notifier)
+                                      .openRegisterView();
+                                },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

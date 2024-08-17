@@ -6,47 +6,31 @@ import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authLocalDataSourceProvider = Provider((ref) => AuthLocalDataSource(
-    hiveService: ref.read(hiveServiceProvider),
-    authHiveModel: ref.read(authHiveModelProvider)));
+    ref.read(hiveServiceProvider),
+    ref.read(authHiveModelProvider)));
 
 class AuthLocalDataSource {
-  final HiveService hiveService;
-  final AuthHiveModel authHiveModel;
+  final HiveService _hiveService;
+  final AuthHiveModel _authHiveModel;
 
-  AuthLocalDataSource({required this.hiveService, required this.authHiveModel});
+  AuthLocalDataSource(this._hiveService,  this._authHiveModel);
 
   // Add Student
-  Future<Either<Failure, bool>> addStudent(AuthEntity auth) async {
+  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
     try {
-      // If already username throw error
-      final hiveStudent = authHiveModel.toHiveModel(auth);
-
-      await hiveService.addStudent(hiveStudent);
-
+      await _hiveService.addStudent(_authHiveModel.toHiveModel(student));
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));
     }
   }
 
-  // Get Student
-  Future<Either<Failure, AuthEntity>> getStudent(String username) async {
+  Future<Either<Failure, bool>> loginStudent(
+    String email,
+    String password,
+  ) async {
     try {
-      final hiveStudent = await hiveService.getStudent(username);
-
-      final student = hiveStudent.toEntity();
-
-      return Right(student);
-    } catch (e) {
-      return Left(Failure(error: e.toString()));
-    }
-  }
-
-  // Login
-  Future<Either<Failure, bool>> login(String username, String password) async {
-    try {
-      final student = await hiveService.login(username, password);
-
+      AuthHiveModel? students = await _hiveService.login(email, password);
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));

@@ -26,6 +26,12 @@ class _SplashViewState extends ConsumerState<SplashView> {
               image: AssetImage(
                   'assets/images/fitheal_dark.png'), // Replace with your image path
             ),
+            SizedBox(height: 20), // Add some spacing
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.white), // Customize color if needed
+            ),
+            SizedBox(height: 20), // Add some spacing
             Text(
               "Version 1.0.0",
               style: TextStyle(color: Colors.white),

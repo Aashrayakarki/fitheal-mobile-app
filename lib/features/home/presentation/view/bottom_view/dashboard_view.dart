@@ -29,7 +29,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             onPressed: () {
               // ref.read(batchViewModelProvider.notifier).getBatches();
               // ref.read(courseViewModelProvider.notifier).getCourses();
-              showMySnackBar(message: 'Refressing...');
+              showMySnackBar(message: 'Refreshing...');
             },
             icon: const Icon(
               Icons.refresh,
@@ -55,10 +55,14 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               }),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(),
-      ),
+      body: const Center(
+          child: Text(
+        'WELCOME TO DASHBOARD SCREEN',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      )),
     );
   }
 }
