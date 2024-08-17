@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
 import 'package:final_assignment/features/auth/domain/usecases/auth_usecase.dart';
@@ -20,22 +18,20 @@ final authViewModelProvider = StateNotifierProvider<AuthViewModel, AuthState>(
 );
 
 class AuthViewModel extends StateNotifier<AuthState> {
-  AuthViewModel(this.loginNavigator,this.registerNavigator, this.homeNavigator, this.authUseCase) : super(AuthState.initial());
+  AuthViewModel(this.loginNavigator, this.registerNavigator, this.homeNavigator,
+      this.authUseCase)
+      : super(AuthState.initial());
   final AuthUseCase authUseCase;
   final LoginViewNavigator loginNavigator;
   final RegisterViewNavigator registerNavigator;
   final HomeViewNavigator homeNavigator;
 
-
-  Future<void> registerStudent(AuthEntity user) async {
+  Future<void> registerUser(AuthEntity user) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.registerStudent(user);
+    var data = await authUseCase.registerUser(user);
     data.fold(
       (failure) {
-        state = state.copyWith(
-          isLoading: false,
-          error: failure.error,
-        );
+        state = state.copyWith(isLoading: false, error: failure.error);
         showMySnackBar(message: failure.error, color: Colors.red);
       },
       (success) {
@@ -45,19 +41,17 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  loginStudent(
-    String email,
-    String password,
-  ) async {
+  Future<void> loginUser(String email, String password) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.loginStudent(email, password);
+    var data = await authUseCase.loginUser(email, password);
     data.fold(
       (failure) {
         state = state.copyWith(isLoading: false, error: failure.error);
-        showMySnackBar(message: failure.error, color: Colors.red);
+        showMySnackBar(message: "Incorrect Password", color: Colors.red);
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
+        showMySnackBar(message: "Successfully logged in");
         openHomeView();
       },
     );

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:final_assignment/core/failure/failure.dart';
 import 'package:final_assignment/features/auth/domain/entity/auth_entity.dart';
@@ -15,13 +13,12 @@ class AuthUseCase {
 
   AuthUseCase(this._authRepository);
 
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
-    return await _authRepository.registerStudent(student);
+  Future<Either<Failure, bool>> registerUser(AuthEntity? user) async {
+    return await _authRepository.registerUser(user!);
   }
 
-  Future<Either<Failure, bool>> loginStudent(
-      String email, String password) async {
-    return await _authRepository.loginStudent(email, password);
+  Future<Either<Failure, bool>> loginUser(String? email, String? password) async {
+    return await _authRepository.loginUser(email!, password!);
   }
 
   Future<Either<Failure, AuthEntity>> getCurrentUser() async {

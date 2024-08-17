@@ -50,7 +50,6 @@ class ExerciseRemoteDataSource {
   }
 
   Future<Either<Failure, List<ExerciseEntity>>> getAllExercises(page) async {
-    // send the page number too
     try {
       final response = await dio.get(
         ApiEndpoints.getAllExercises,
@@ -66,6 +65,8 @@ class ExerciseRemoteDataSource {
       return Left(Failure(error: error.toString()));
     }
   }
+
+  //Delete exercise
 
   Future<Either<Failure, bool>> deleteExercise(String exerciseId) async {
     try {

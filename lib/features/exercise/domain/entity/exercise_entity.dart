@@ -6,7 +6,7 @@ class ExerciseEntity extends Equatable {
   final String exerciseTime;
   final String exerciseCalories;
   final String exerciseLevel;
-  final String exerciseVideo;
+  final String exerciseThumbnail;
 
   const ExerciseEntity({
     this.exerciseId,
@@ -14,9 +14,16 @@ class ExerciseEntity extends Equatable {
     required this.exerciseTime,
     required this.exerciseCalories,
     required this.exerciseLevel,
-    required this.exerciseVideo,
+    required this.exerciseThumbnail,
   });
 
   @override
-  List<Object?> get props => [exerciseId, exerciseName, exerciseTime, exerciseCalories, exerciseLevel, exerciseVideo];
+  List<Object?> get props => [
+        exerciseId,
+        exerciseName,
+        exerciseTime,
+        exerciseCalories,
+        exerciseLevel,
+        exerciseThumbnail
+      ];
 }

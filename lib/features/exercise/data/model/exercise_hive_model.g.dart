@@ -22,7 +22,7 @@ class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
       exerciseTime: fields[2] as String,
       exerciseCalories: fields[3] as String,
       exerciseLevel: fields[4] as String,
-      exerciseVideo: fields[5] as String,
+      exerciseThumbnail: fields[5] as String,
     );
   }
 
@@ -41,7 +41,7 @@ class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
       ..writeByte(4)
       ..write(obj.exerciseLevel)
       ..writeByte(5)
-      ..write(obj.exerciseVideo);
+      ..write(obj.exerciseThumbnail);
   }
 
   @override

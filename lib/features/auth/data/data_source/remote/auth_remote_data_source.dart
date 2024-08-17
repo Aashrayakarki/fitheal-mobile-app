@@ -21,16 +21,20 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource({required this.dio, required this.userSharedPrefs});
 
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
+  Future<Either<Failure, bool>> registerUser(AuthEntity user) async {
     try {
       Response response = await dio.post(
         ApiEndpoints.register,
         data: {
-          "fname": student.fname,
-          "lname": student.lname,
-          "phone": student.phone,
-          "email": student.email,
-          "password": student.password,
+          "fname": user.fname,
+          "lname": user.lname,
+          "phone": user.phone,
+          "email": user.email,
+          "password": user.password,
+          "height": user.height,
+          "weight": user.weight,
+          "age": user.age,
+          "gender":user.gender
         },
       );
       if (response.statusCode == 200) {
@@ -84,7 +88,7 @@ class AuthRemoteDataSource {
   //   }
   // }
 
-  Future<Either<Failure, bool>> loginStudent(
+  Future<Either<Failure, bool>> loginUser(
     String email,
     String password,
   ) async {
@@ -125,8 +129,8 @@ class AuthRemoteDataSource {
       String? token;
       var data = await userSharedPrefs.getUserToken();
       data.fold(
-            (l) => token = null,
-            (r) => token = r!,
+        (l) => token = null,
+        (r) => token = r!,
       );
 
       var response = await dio.get(
@@ -137,7 +141,8 @@ class AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        GetCurrentUserDto getCurrentUserDto = GetCurrentUserDto.fromJson(response.data);
+        GetCurrentUserDto getCurrentUserDto =
+            GetCurrentUserDto.fromJson(response.data);
 
         return Right(getCurrentUserDto.toEntity());
       } else {

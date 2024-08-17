@@ -1,6 +1,7 @@
 import 'package:final_assignment/app/constants/hive_table_constant.dart';
 import 'package:final_assignment/features/auth/data/model/auth_hive_model.dart';
 import 'package:final_assignment/features/exercise/data/model/exercise_hive_model.dart';
+import 'package:final_assignment/features/meal_plan/data/model/meal_hive_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,6 +16,7 @@ class HiveService {
     // Register Adapters
     Hive.registerAdapter(AuthHiveModelAdapter());
     Hive.registerAdapter(ExerciseHiveModelAdapter());
+    Hive.registerAdapter(MealHiveModelAdapter());
   }
 
   // ============= User Queries
@@ -50,6 +52,20 @@ class HiveService {
     box.close();
     return exercises;
   }
+
+    // ======================== Meal Queries ========================
+  Future<void> addMeal(MealHiveModel meal) async {
+    var box = await Hive.openBox<MealHiveModel>(HiveTableConstant.mealBox);
+    await box.put(meal.mealId, meal);
+  }
+
+  Future<List<MealHiveModel>> getAllMeals(int page) async {
+    var box = await Hive.openBox<MealHiveModel>(HiveTableConstant.mealBox);
+    var meals = box.values.toList();
+    box.close();
+    return meals;
+  }
+
 
 }
 
