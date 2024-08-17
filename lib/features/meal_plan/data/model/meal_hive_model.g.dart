@@ -19,31 +19,34 @@ class MealHiveModelAdapter extends TypeAdapter<MealHiveModel> {
     return MealHiveModel(
       mealId: fields[0] as String?,
       mealName: fields[1] as String,
-      mealTime: fields[2] as String,
-      mealCalories: fields[3] as String,
-      mealProteins: fields[4] as String,
-      mealCarbs: fields[5] as String,
-      mealImage: fields[6] as String,
+      mealDescription: fields[2] as String,
+      mealTime: fields[3] as String,
+      mealCalories: fields[4] as String,
+      mealProteins: fields[5] as String,
+      mealCarbs: fields[6] as String,
+      mealImage: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, MealHiveModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.mealId)
       ..writeByte(1)
       ..write(obj.mealName)
       ..writeByte(2)
-      ..write(obj.mealTime)
+      ..write(obj.mealDescription)
       ..writeByte(3)
-      ..write(obj.mealCalories)
+      ..write(obj.mealTime)
       ..writeByte(4)
-      ..write(obj.mealProteins)
+      ..write(obj.mealCalories)
       ..writeByte(5)
-      ..write(obj.mealCarbs)
+      ..write(obj.mealProteins)
       ..writeByte(6)
+      ..write(obj.mealCarbs)
+      ..writeByte(7)
       ..write(obj.mealImage);
   }
 

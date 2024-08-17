@@ -11,6 +11,7 @@ class MealApiModel {
   @JsonKey(name: '_id')
   final String? mealId;
   final String mealName;
+  final String mealDescription;
   final String mealTime;
   final String mealCalories;
   final String mealProteins;
@@ -20,6 +21,7 @@ class MealApiModel {
   MealApiModel({
     required this.mealId,
     required this.mealName,
+    required this.mealDescription,
     required this.mealTime,
     required this.mealCalories,
     required this.mealProteins,
@@ -31,17 +33,18 @@ class MealApiModel {
   MealApiModel.empty()
       : mealId = '',
         mealName = '',
+        mealDescription = '',
         mealTime = '',
         mealCalories = '',
         mealProteins = '',
         mealCarbs = '',
         mealImage = '';
-        
 
   factory MealApiModel.fromJson(Map<String, dynamic> json) {
     return MealApiModel(
       mealId: json['_id'],
       mealName: json['mealName'],
+      mealDescription: json['mealDescription'],
       mealTime: json['mealTime'],
       mealCalories: json['mealCalories'],
       mealProteins: json['mealProteins'],
@@ -53,6 +56,7 @@ class MealApiModel {
   Map<String, dynamic> toJson() {
     return {
       'mealName': mealName,
+      'mealDescription': mealDescription,
       'mealTime': mealTime,
       'mealCalories': mealCalories,
       'mealProteins': mealProteins,
@@ -65,6 +69,7 @@ class MealApiModel {
   MealEntity toEntity() => MealEntity(
         mealId: mealId,
         mealName: mealName,
+        mealDescription: mealDescription,
         mealTime: mealTime,
         mealCalories: mealCalories,
         mealProteins: mealProteins,
@@ -76,6 +81,7 @@ class MealApiModel {
   MealApiModel fromEntity(MealEntity entity) => MealApiModel(
         mealId: entity.mealId ?? '',
         mealName: entity.mealName,
+        mealDescription: entity.mealDescription,
         mealTime: entity.mealTime,
         mealCalories: entity.mealCalories,
         mealProteins: entity.mealProteins,

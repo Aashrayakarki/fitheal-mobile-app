@@ -19,18 +19,21 @@ class MealHiveModel {
   final String mealName;
 
   @HiveField(2)
-  final String mealTime;
+  final String mealDescription;
 
   @HiveField(3)
-  final String mealCalories;
+  final String mealTime;
 
   @HiveField(4)
-  final String mealProteins;
+  final String mealCalories;
 
   @HiveField(5)
-  final String mealCarbs;
+  final String mealProteins;
 
   @HiveField(6)
+  final String mealCarbs;
+
+  @HiveField(7)
   final String mealImage;
 
   // empty constructor
@@ -38,6 +41,7 @@ class MealHiveModel {
       : this(
             mealId: '',
             mealName: '',
+            mealDescription: '',
             mealTime: '',
             mealCalories: '',
             mealProteins: '',
@@ -47,6 +51,7 @@ class MealHiveModel {
   MealHiveModel({
     String? mealId,
     required this.mealName,
+    required this.mealDescription,
     required this.mealTime,
     required this.mealCalories,
     required this.mealProteins,
@@ -58,6 +63,7 @@ class MealHiveModel {
     return MealEntity(
       mealId: mealId,
       mealName: mealName,
+      mealDescription: mealDescription,
       mealTime: mealTime,
       mealCalories: mealCalories,
       mealProteins: mealProteins,
@@ -70,6 +76,7 @@ class MealHiveModel {
     return MealHiveModel(
       mealId: entity.mealId,
       mealName: entity.mealName,
+      mealDescription: entity.mealDescription,
       mealTime: entity.mealTime,
       mealCalories: entity.mealCalories,
       mealProteins: entity.mealProteins,
@@ -89,6 +96,6 @@ class MealHiveModel {
 
   @override
   String toString() {
-    return 'mealId: $mealId, mealName: $mealName, mealTime: $mealTime, mealCalories: $mealCalories, mealProteins: $mealProteins, mealCarbs: $mealCarbs, mealImage: $mealImage';
+    return 'mealId: $mealId, mealName: $mealName, mealDescription: $mealDescription, mealTime: $mealTime, mealCalories: $mealCalories, mealProteins: $mealProteins, mealCarbs: $mealCarbs, mealImage: $mealImage';
   }
 }

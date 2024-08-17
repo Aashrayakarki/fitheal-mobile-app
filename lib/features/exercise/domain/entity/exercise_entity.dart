@@ -7,6 +7,7 @@ class ExerciseEntity extends Equatable {
   final String exerciseCalories;
   final String exerciseLevel;
   final String exerciseThumbnail;
+  final String exerciseVideo;
 
   const ExerciseEntity({
     this.exerciseId,
@@ -15,6 +16,7 @@ class ExerciseEntity extends Equatable {
     required this.exerciseCalories,
     required this.exerciseLevel,
     required this.exerciseThumbnail,
+    required this.exerciseVideo,
   });
 
   @override
@@ -24,6 +26,7 @@ class ExerciseEntity extends Equatable {
         exerciseTime,
         exerciseCalories,
         exerciseLevel,
-        exerciseThumbnail
+        exerciseThumbnail,
+        exerciseVideo
       ];
 }

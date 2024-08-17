@@ -1,5 +1,3 @@
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
-import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
 import 'package:final_assignment/features/meal_plan/domain/entity/meal_entity.dart';
 import 'package:final_assignment/features/meal_plan/presentation/viewmodel/meal_view_model.dart';
 import 'package:flutter/material.dart';

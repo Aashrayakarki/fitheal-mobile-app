@@ -23,13 +23,14 @@ class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
       exerciseCalories: fields[3] as String,
       exerciseLevel: fields[4] as String,
       exerciseThumbnail: fields[5] as String,
+      exerciseVideo: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ExerciseHiveModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.exerciseId)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class ExerciseHiveModelAdapter extends TypeAdapter<ExerciseHiveModel> {
       ..writeByte(4)
       ..write(obj.exerciseLevel)
       ..writeByte(5)
-      ..write(obj.exerciseThumbnail);
+      ..write(obj.exerciseThumbnail)
+      ..writeByte(6)
+      ..write(obj.exerciseVideo);
   }
 
   @override

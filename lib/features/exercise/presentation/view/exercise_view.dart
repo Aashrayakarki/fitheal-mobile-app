@@ -1,186 +1,106 @@
-import 'dart:io';
-
-import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
+import 'package:final_assignment/core/common/my_snackbar.dart';
 import 'package:final_assignment/features/exercise/presentation/viewmodel/exercise_view_model.dart';
-import 'package:final_assignment/features/exercise/presentation/widgets/load_exercise.dart';
+import 'package:final_assignment/features/home/presentation/widget/exercise_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ExerciseView extends ConsumerStatefulWidget {
   const ExerciseView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddExerciseViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ExerciseViewState();
 }
 
-class _AddExerciseViewState extends ConsumerState<ExerciseView> {
-  final exerciseNameController = TextEditingController();
-  final exerciseTimeController = TextEditingController();
-  final exerciseCaloriesController = TextEditingController();
-  final exerciseLevelController = TextEditingController();
-  final exerciseVideoController = TextEditingController();
-  File? exerciseThumbnailFile;
+class _ExerciseViewState extends ConsumerState<ExerciseView> {
+  final ScrollController _scrollController = ScrollController();
+  int _exercisePage = 1;
 
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        exerciseThumbnailFile = File(pickedFile.path);
-      });
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+    // Initial data fetch
+    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      ref.read(exerciseViewModelProvider.notifier).getAllExercises();
     }
   }
 
-  var gap = const SizedBox(height: 8);
+  void _nextExercisePage() {
+    setState(() {
+      _exercisePage++;
+    });
+    ref.read(exerciseViewModelProvider.notifier).getAllExercises();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var exerciseState = ref.watch(exerciseViewModelProvider);
+    final exerciseState = ref.watch(exerciseViewModelProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Exercise Management'),
+        title: const Text('Exercises View'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(exerciseViewModelProvider.notifier).resetState();
+              showMySnackBar(message: 'Refreshing...');
+            },
+            icon: const Icon(Icons.refresh, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {
+              // Handle logout or other actions if needed
+            },
+            icon: const Icon(Icons.logout, color: Colors.white),
+          ),
+        ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              gap,
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Add Exercise',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              gap,
-              TextFormField(
-                controller: exerciseNameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Exercise Name',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter exercise name';
-                  }
-                  return null;
-                },
-              ),
-              gap,
-              TextFormField(
-                controller: exerciseTimeController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Exercise Time',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter exercise time';
-                  }
-                  return null;
-                },
-              ),
-              gap,
-              TextFormField(
-                controller: exerciseCaloriesController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Exercise Calories',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter exercise calories';
-                  }
-                  return null;
-                },
-              ),
-              gap,
-              TextFormField(
-                controller: exerciseLevelController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Exercise Level',
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter exercise level';
-                  }
-                  return null;
-                },
-              ),
-              gap,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'Exercises Available',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: Column(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: TextEditingController(
-                        text: exerciseThumbnailFile != null ? exerciseThumbnailFile!.path : '',
-                      ),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Exercise Thumbnail',
-                      ),
+                    child: ExerciseWidget(
+                      ref: ref,
+                      exerciseList: exerciseState.lstExercises,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.attach_file),
-                    onPressed: _pickImage,
-                  ),
+                  if (exerciseState.lstExercises.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: _nextExercisePage,
+                            child: const Text('Show more exercises'),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
-              const SizedBox(height: 10),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ExerciseEntity exercise = ExerciseEntity(
-                        exerciseName: exerciseNameController.text,
-                        exerciseTime: exerciseTimeController.text,
-                        exerciseCalories: exerciseCaloriesController.text,
-                        exerciseLevel: exerciseLevelController.text,
-                        exerciseThumbnail:
-                          exerciseThumbnailFile != null ? exerciseThumbnailFile!.path : '',
-                        );
-                    ref
-                        .read(exerciseViewModelProvider.notifier)
-                        .addExercise(exercise);
-                  },
-                  child: const Text('Add Exercise'),
-                ),
-              ),
-              gap,
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'List of Exercises',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              gap,
-              if (exerciseState.isLoading) ...{
-                const CircularProgressIndicator(),
-              } else if (exerciseState.error != null) ...{
-                Text(exerciseState.error!),
-              } else if (exerciseState.lstExercises.isNotEmpty) ...{
-                Expanded(
-                  child: LoadExercise(
-                    lstExercise: exerciseState.lstExercises,
-                    ref: ref,
-                  ),
-                ),
-              }
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
