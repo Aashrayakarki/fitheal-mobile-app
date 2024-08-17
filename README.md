@@ -16,18 +16,16 @@ This repository contains the Flutter code for the FitHeal mobile application. Th
 
 ## Features
 
-- **User Authentication:** Secure sign-up and login using Firebase Authentication.
-- **Workout Management:** Create, update, delete, and view workout routines.
-- **Diet Tracking:** Log meals, view nutritional information, and track diet progress.
-- **Progress Tracking:** Visualize fitness progress with charts and graphs.
-- **Push Notifications:** Get reminders for workouts and meal tracking.
+- **User Authentication:** Secure sign-up and login using MongoDB Authentication.
+- **Exercise Management:** Create, update, delete, and view workout routines.
+- **Meal plans management:** View nutritional information, and track diet progress.
 - **Cross-Platform:** Runs seamlessly on both Android and iOS devices.
 
 ## Technologies
 
 - **Flutter** - Cross-platform mobile framework by Google.
 - **Dart** - Programming language used with Flutter.
-- **Firebase** - Backend services for authentication, real-time database, and push notifications.
+- **MongoDB** - Backend services for authentication, real-time database.
 - **Provider** - State management for Flutter apps.
 - **Hive** - Lightweight and fast NoSQL database for local storage.
 
@@ -68,8 +66,7 @@ To set up and run the FitHeal mobile app locally, follow these steps:
 
 ## Usage
 
-- **Home Screen:** Overview of your fitness stats and quick access to key features.
-- **Workout Screen:** Manage and log workouts, view exercise history.
-- **Diet Screen:** Track meals, view nutritional breakdown, and log dietary habits.
-- **Progress Screen:** Monitor progress with detailed charts and graphs.
-- **Settings:** Update profile information, manage app preferences, and configure notifications.
+- **Dashboard Screen:** Overview of all the exercises and meal plans available.
+- **Exercises Screen:** Manage and view workouts.
+- **Meal Plans Screen:** View nutritional breakdown and recipies.
+- **Profile Screen:** View and update user profile
