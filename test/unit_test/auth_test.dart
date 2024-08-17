@@ -134,6 +134,10 @@ void main() {
             phone: "9808750214",
             email: 'ak@gmail.com',
             password: '1234',
+            height: '170',
+            weight: '70',
+            age: '21',
+            gender: 'male'
           ));
 
       final state = container.read(authViewModelProvider);
@@ -151,6 +155,10 @@ void main() {
       phone: '9821346589',
       password: '123456',
       email: 'ak@gmail.com',
+      height: '170',
+      weight: '70',
+      age: '21',
+      gender: 'male'
     );
 
     const existingUserEntity = AuthEntity(
@@ -159,6 +167,10 @@ void main() {
       phone: "9808750214",
       email: 'ak@gmail.com',
       password: '1234',
+      height: '170',
+      weight: '70',
+      age: '21',
+      gender: 'male'
     );
 
     when(mockAuthUsecase.registerUser(any)).thenAnswer((invocation) {

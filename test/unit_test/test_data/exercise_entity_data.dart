@@ -12,6 +12,7 @@ class ExerciseTestData {
         exerciseCalories: "100",
         exerciseLevel: "Beginner",
         exerciseThumbnail: "https://www.youtube.com/watch?v=IODxDxX7oi4",
+        exerciseVideo: "abc.mp4"
       ),
       const ExerciseEntity(
         exerciseId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
@@ -20,6 +21,7 @@ class ExerciseTestData {
         exerciseCalories: "100",
         exerciseLevel: "Beginner",
         exerciseThumbnail: "https://www.youtube.com/watch?v=IODxDxX7oi4",
+        exerciseVideo: "abc.mp4"
       ),
     ];
 

@@ -14,6 +14,7 @@ class MealTestData {
         mealProteins: "160",
         mealCarbs: "200",
         mealImage: "abc.png",
+        mealDescription: "This is a description",
       ),
       const MealEntity(
         mealId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
@@ -23,6 +24,7 @@ class MealTestData {
         mealProteins: "160",
         mealCarbs: "200",
         mealImage: "abc.png",
+        mealDescription: "This is a description",
       ),
     ];
 
