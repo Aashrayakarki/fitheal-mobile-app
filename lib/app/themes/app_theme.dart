@@ -11,9 +11,7 @@ class AppTheme {
           ? const ColorScheme.dark(
               primary: ThemeConstant.darkPrimaryColor,
             )
-          : const ColorScheme.light(
-              primary: Color.fromARGB(255, 17, 119, 20),
-            ),
+          : const ColorScheme.light(primary: Colors.orange),
       brightness: isDark ? Brightness.dark : Brightness.light,
       fontFamily: 'Montserrat',
       useMaterial3: true,
@@ -21,7 +19,7 @@ class AppTheme {
       // Change app bar color
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        backgroundColor: ThemeConstant.appBarColor,
+        backgroundColor: Colors.orange,
         centerTitle: true,
         titleTextStyle: TextStyle(
           color: Colors.white,
@@ -68,7 +66,7 @@ class AppTheme {
       ),
       //Bottom navigation bar theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.orange,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
