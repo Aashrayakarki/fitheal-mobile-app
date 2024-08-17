@@ -18,7 +18,7 @@ class AuthLocalDataSource {
   // Add Student
   Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
     try {
-      await _hiveService.addStudent(_authHiveModel.toHiveModel(student));
+      await _hiveService.addUser(_authHiveModel.toHiveModel(student));
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));
@@ -30,7 +30,7 @@ class AuthLocalDataSource {
     String password,
   ) async {
     try {
-      AuthHiveModel? students = await _hiveService.login(email, password);
+      AuthHiveModel? users = await _hiveService.login(email, password);
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));

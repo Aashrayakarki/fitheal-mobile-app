@@ -1,4 +1,3 @@
-import 'package:final_assignment/app/constants/api_endpoint.dart';
 import 'package:final_assignment/features/home/presentation/viewmodel/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +32,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             //   height: 300,
             //   width: 300,
             //   child: Image.network(
-            //       '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
+                  // '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
             // ),
             const SizedBox(height: 10),
             Text(

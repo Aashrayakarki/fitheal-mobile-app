@@ -12,7 +12,7 @@ class App extends ConsumerWidget {
     return MaterialApp(
       navigatorKey: AppNavigator.navigatorKey,
       debugShowCheckedModeBanner: false,
-      title: 'Student Management',
+      title: 'Fit Heal',
       theme: AppTheme.getApplicationTheme(false),
       home: const SplashView(),
     );

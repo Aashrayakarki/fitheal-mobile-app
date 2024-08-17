@@ -1,3 +1,4 @@
+import 'package:final_assignment/features/exercise/presentation/view/exercise_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/dashboard_view.dart';
 import 'package:final_assignment/features/home/presentation/view/bottom_view/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   int selectedIndex = 0;
   List<Widget> lstScreen = [
     const DashboardView(),
+    const ExerciseView(),
     const ProfileView(),
   ];
   @override
