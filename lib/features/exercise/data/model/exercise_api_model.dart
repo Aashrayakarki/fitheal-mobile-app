@@ -1,0 +1,81 @@
+import 'package:final_assignment/features/exercise/domain/entity/exercise_entity.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+final exerciseApiModelProvider = Provider<ExerciseApiModel>((ref) {
+  return ExerciseApiModel.empty();
+});
+
+@JsonSerializable()
+class ExerciseApiModel {
+  @JsonKey(name: '_id')
+  final String? exerciseId;
+  final String exerciseName;
+  final String exerciseTime;
+  final String exerciseCalories;
+  final String exerciseLevel;
+  final String exerciseThumbnail;
+
+  ExerciseApiModel({
+    required this.exerciseId,
+    required this.exerciseName,
+    required this.exerciseTime,
+    required this.exerciseCalories,
+    required this.exerciseLevel,
+    required this.exerciseThumbnail,
+  });
+
+  // Empty constructor
+  ExerciseApiModel.empty()
+      : exerciseId = '',
+        exerciseName = '',
+        exerciseTime = '',
+        exerciseCalories = '',
+        exerciseLevel = '',
+        exerciseThumbnail = '';
+
+  factory ExerciseApiModel.fromJson(Map<String, dynamic> json) {
+    return ExerciseApiModel(
+      exerciseId: json['_id'],
+      exerciseName: json['exerciseName'],
+      exerciseTime: json['exerciseTime'],
+      exerciseCalories: json['exerciseCalories'],
+      exerciseLevel: json['exerciseLevel'],
+      exerciseThumbnail: json['exerciseThumbnail'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'exerciseName': exerciseName,
+      'exerciseTime': exerciseTime,
+      'exerciseCalories': exerciseCalories,
+      'exerciseLevel': exerciseLevel,
+      'exerciseThumbnail': exerciseThumbnail,
+    };
+  }
+
+  // Convert API Object to Entity
+  ExerciseEntity toEntity() => ExerciseEntity(
+        exerciseId: exerciseId,
+        exerciseName: exerciseName,
+        exerciseTime: exerciseTime,
+        exerciseCalories: exerciseCalories,
+        exerciseLevel: exerciseLevel,
+        exerciseThumbnail: exerciseThumbnail,
+      );
+
+  // Convert Entity to API Object
+  ExerciseApiModel fromEntity(ExerciseEntity entity) => ExerciseApiModel(
+        exerciseId: entity.exerciseId ?? '',
+        exerciseName: entity.exerciseName,
+        exerciseTime: entity.exerciseTime,
+        exerciseCalories: entity.exerciseCalories,
+        exerciseLevel: entity.exerciseLevel,
+        exerciseThumbnail: entity.exerciseThumbnail,
+      );
+
+  // Convert API List to Entity List
+  List<ExerciseEntity> toEntityList(List<ExerciseApiModel> models) =>
+      models.map((model) => model.toEntity()).toList();
+}

@@ -3,26 +3,28 @@ class ApiEndpoints {
 
   static const Duration connectionTimeout = Duration(seconds: 1000);
   static const Duration receiveTimeout = Duration(seconds: 1000);
-  static const String baseUrl = "http://10.0.2.2:3000/api/v1/";
-  //static const String baseUrl = "http://192.168.4.4:3000/api/v1/";
+
+  static const String baseUrl = "http://192.168.1.8:5000/api/";
+  static const String imageUrl = "http://192.168.1.8:5000/products/";
 
   // ====================== Auth Routes ======================
-  static const String login = "auth/login";
-  static const String register = "auth/register";
-  static const String getAllStudent = "auth/getAllStudents";
-  static const String getStudentsByBatch = "auth/getStudentsByBatch/";
-  static const String getStudentsByCourse = "auth/getStudentsByCourse/";
-  static const String updateStudent = "auth/updateStudent/";
-  static const String deleteStudent = "auth/deleteStudent/";
-  static const String imageUrl = "http://10.0.2.2:3000/uploads/";
-  static const String uploadImage = "auth/uploadImage";
+  static const String login = "user/login";
+  static const String register = "user/register";
+  static const String currentUser = "user/get_single_user";
+  static const String uploadImage = "user/uploadThumbnail";
+  static const String forgotPassword = "user/forgot_password";
 
-  // ====================== Batch Routes ======================
-  static const String createBatch = "batch/createBatch";
-  static const String getAllBatch = "batch/getAllBatches";
+  // ====================== Exercise Routes ======================
+  static const String createExercise = "exercise/create";
+  static const String getAllExercises = "exercise/pagination_exercise";
+  static const String deleteExercise = "exercise/";
 
-  // ====================== Course Routes ======================
-  static const String createCourse = "course/createCourse";
-  static const String deleteCourse = "course/";
-  static const String getAllCourse = "course/getAllCourse";
+  // ====================== Meal Routes ======================
+  static const String createMeal = "meal/create";
+  static const String getAllMeals = "meal/pagination_meal";
+  static const String deleteMeal = "meal/";
+
+  static const limitPage = 4;
+
+  // static const String paginationExercise = "exercise/pagination";
 }
