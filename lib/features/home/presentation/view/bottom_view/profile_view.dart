@@ -61,6 +61,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                         "Age", currentUser.authEntity?.age ?? "", "🎂"),
                     _buildInfoRow(
                         "Gender", currentUser.authEntity?.gender ?? "", "🚻"),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

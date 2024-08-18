@@ -13,6 +13,7 @@ class ApiEndpoints {
   static const String currentUser = "user/getMe";
   static const String uploadImage = "user/uploadThumbnail";
   static const String forgotPassword = "user/forgot_password";
+  static const String verifyOtp = "user/verify_otp";
 
   // ====================== Exercise Routes ======================
   static const String createExercise = "exercise/create";

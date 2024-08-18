@@ -6,6 +6,10 @@ class ExerciseEntity extends Equatable {
   final String exerciseTime;
   final String exerciseCalories;
   final String exerciseLevel;
+  final String exerciseSets;
+  final String exerciseReps;
+  final String exerciseDescription;
+  final String exerciseInstruction;
   final String exerciseThumbnail;
   final String exerciseVideo;
 
@@ -15,6 +19,10 @@ class ExerciseEntity extends Equatable {
     required this.exerciseTime,
     required this.exerciseCalories,
     required this.exerciseLevel,
+    required this.exerciseSets,
+    required this.exerciseReps,
+    required this.exerciseDescription,
+    required this.exerciseInstruction,
     required this.exerciseThumbnail,
     required this.exerciseVideo,
   });
@@ -26,6 +34,10 @@ class ExerciseEntity extends Equatable {
         exerciseTime,
         exerciseCalories,
         exerciseLevel,
+        exerciseSets,
+        exerciseReps,
+        exerciseDescription,
+        exerciseInstruction,
         exerciseThumbnail,
         exerciseVideo
       ];
