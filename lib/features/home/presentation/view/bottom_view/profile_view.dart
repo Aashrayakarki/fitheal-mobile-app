@@ -25,60 +25,77 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
       );
     } else {
       return SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // SizedBox(
-            //   height: 300,
-            //   width: 300,
-            //   child: Image.network(
-            // '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
-            // ),
-            const SizedBox(height: 10),
-            Text(
-              "First Name : ${currentUser.authEntity?.fname ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Profile Information",
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildInfoRow("First Name",
+                        currentUser.authEntity?.fname ?? "", "👤"),
+                    _buildInfoRow(
+                        "Last Name", currentUser.authEntity?.lname ?? "", "👤"),
+                    _buildInfoRow("Phone Number",
+                        currentUser.authEntity?.phone ?? "", "📞"),
+                    _buildInfoRow(
+                        "Height", currentUser.authEntity?.height ?? "", "📏"),
+                    _buildInfoRow(
+                        "Weight", currentUser.authEntity?.weight ?? "", "⚖️"),
+                    _buildInfoRow(
+                        "Age", currentUser.authEntity?.age ?? "", "🎂"),
+                    _buildInfoRow(
+                        "Gender", currentUser.authEntity?.gender ?? "", "🚻"),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              "Last Name : ${currentUser.authEntity?.lname ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Height : ${currentUser.authEntity?.height ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Weight : ${currentUser.authEntity?.weight ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Age : ${currentUser.authEntity?.age ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Gender : ${currentUser.authEntity?.gender ?? ""}",
-              style: const TextStyle(
-                fontSize: 30,
-              ),
-            )
-          ],
+          ),
         ),
       );
     }
+  }
+
+  Widget _buildInfoRow(String label, String value, String emoji) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "$emoji $label:",
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

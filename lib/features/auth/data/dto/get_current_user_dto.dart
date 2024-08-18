@@ -9,7 +9,7 @@ class GetCurrentUserDto {
   final String id;
   final String fname;
   final String lname;
-  final String phone;
+  final String phone; // Ensure this is a String
   final String email;
   final String height;
   final String weight;
@@ -44,7 +44,17 @@ class GetCurrentUserDto {
   }
 
   factory GetCurrentUserDto.fromJson(Map<String, dynamic> json) =>
-      _$GetCurrentUserDtoFromJson(json);
+      GetCurrentUserDto(
+        id: json['_id'] as String,
+        fname: json['fname'] as String,
+        lname: json['lname'] as String,
+        phone: json['phone']?.toString() ?? '', // Convert phone to String
+        email: json['email'] as String,
+        height: json['height'] as String,
+        weight: json['weight'] as String,
+        age: json['age'] as String,
+        gender: json['gender'] as String,
+      );
 
   Map<String, dynamic> toJson() => _$GetCurrentUserDtoToJson(this);
 }
