@@ -62,9 +62,9 @@ void main() {
         .read(mealViewModelProvider.notifier)
         .addMeal(lstMeals[0]);
 
-    final batchState = container.read(mealViewModelProvider);
+    final mealState = container.read(mealViewModelProvider);
 
-    expect(batchState.error, isNull);
+    expect(mealState.error, isNull);
   });
 
   tearDown(() {

@@ -154,7 +154,7 @@ void main() {
       lname: 'Greaves',
       phone: '9821346589',
       password: '123456',
-      email: 'ak@gmail.com',
+      email: 'yb@gmail.com',
       height: '170',
       weight: '70',
       age: '21',

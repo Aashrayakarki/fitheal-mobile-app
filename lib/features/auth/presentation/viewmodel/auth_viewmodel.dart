@@ -45,16 +45,18 @@ class AuthViewModel extends StateNotifier<AuthState> {
     state = state.copyWith(isLoading: true);
     var data = await authUseCase.loginUser(email, password);
     data.fold(
-      (failure) {
-        state = state.copyWith(isLoading: false, error: failure.error);
-        showMySnackBar(message: "Incorrect Password", color: Colors.red);
-      },
-      (success) {
-        state = state.copyWith(isLoading: false, error: null);
-        showMySnackBar(message: "Successfully logged in");
-        openHomeView();
-      },
-    );
+  (failure) {
+    print("Login failed: ${failure.error}");
+    state = state.copyWith(isLoading: false, error: failure.error);
+    showMySnackBar(message: "Incorrect Password", color: Colors.red);
+  },
+  (success) {
+    state = state.copyWith(isLoading: false, error: null);
+    showMySnackBar(message: "Successfully logged in");
+    openHomeView();
+  },
+);
+
   }
 
   void openLoginView() {

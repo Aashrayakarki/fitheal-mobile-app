@@ -129,22 +129,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       obscureText: isObscure,
                       icon: isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
-                    _gap,
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          "Forgot password?",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    _gap, _gap,
+                      _gap, _gap,
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {

@@ -50,7 +50,6 @@ void main() {
     expect(exerciseState.lstExercises, isNotEmpty);
   });
 
-  // Remove snackbar code from viewmodel vefore running this code
   test('add exercise entity and return true if successfully added', () async {
     when(mockExerciseUseCase.getAllExercises(any))
         .thenAnswer((_) => Future.value(Right(lstExercises)));
